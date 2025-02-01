@@ -8,8 +8,6 @@
       ../../modules/packages.nix
     ];
 
-  programs.zsh.shellAliases.update = "sudo nixos-rebuild switch --flake ~/.config/nixos\\#nixos";
-
   users.users.patwoz = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];

@@ -41,6 +41,10 @@
     initExtra = "
       GPG_TTY=\"$(tty)\"
       export GPG_TTY
+
+      if [ -f ~/.zshrc_secret ]; then
+        source ~/.zshrc_secret
+      fi
     ";
   };
 

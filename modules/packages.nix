@@ -8,14 +8,6 @@
     git
     vim
     wget
-    wayland
-    xwayland
-    sway
-    swaylock
-    swayidle
-    waybar
-    wlroots
-    wl-clipboard
     file
   ];
 

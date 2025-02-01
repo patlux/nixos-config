@@ -1,4 +1,4 @@
-{}: 
+{ ... }: 
 
 {
   home.file.".gemrc".text = ''

@@ -11,8 +11,21 @@
     p7zip
 
     neovim
-    eza
+    eza # ls alternative
     pinentry-curses
+    delta # better diff
+    fd # better "find"
+    ncdu
+    watchman
+    imagemagick
+    ffmpeg
+    rsync
+    cmake
+    hyperfine
+    wget
+    lazygit
+    picocom
+    uv
 
     # for neovim
     tree-sitter

@@ -3,6 +3,7 @@
 {
   programs.zsh = {
     enable = true;
+
     shellAliases = {
       mkdir = "mkdir -p -v";
       aic = "aider --model r1 --no-attribute-author --no-attribute-committer";
@@ -13,6 +14,7 @@
       lt = "eza --tree";
       lla = "eza -la" ;
     };
+
     history = {
       size = 10000;
       path = "${config.xdg.dataHome}/zsh/history";

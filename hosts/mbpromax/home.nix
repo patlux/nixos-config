@@ -12,5 +12,5 @@
     ../../home/shell.nix
   ];
 
-  programs.zsh.shellAliases.update = "sudo darwin-rebuild switch --flake ~/.config/nixos\\#mbpromax";
+  programs.zsh.shellAliases.update = "darwin-rebuild switch --flake ~/.config/nixos\\#mbpromax";
 }

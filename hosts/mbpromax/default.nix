@@ -5,13 +5,17 @@
     [
       ../../modules/system.nix
       ../../modules/packages.nix
-      ./darwin.nix
+      ../../modules/darwin
     ];
   #
   # # system.configurationRevision = self.rev or self.dirtyRev or null;
   #
 
   networking.hostName = "mbpromax";
+  networking.computerName = "mbpromax";
+  system.defaults.smb.NetBIOSName = "mbpromax";
+
+  time.timeZone = "Europe/Berlin";
 
   users.users.patwoz = {
     home = "/Users/patwoz";

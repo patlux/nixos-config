@@ -1,35 +1,14 @@
 { ... }: 
 
 {
-  # TODO: move all settings from set-defaults.ts to here
-  system.defaults.dock = {
-    autohide = false;
-    orientation = "right";
-    show-recents = false; # do not show recent apps in dock
-    mru-spaces = false; # do not automatically rearrange spaces based on most recent use.
-    tilesize = 36;
-    launchanim = false;
-    expose-animation-duration = 0.1;
-  };
-
-  system.defaults.finder = {
-    FXEnableExtensionChangeWarning = false;
-    _FXShowPosixPathInTitle = true; # show full path in finder title
-    AppleShowAllExtensions = true;
-    AppleShowAllFiles = true;
-    ShowPathbar = true;
-    ShowStatusBar = true;
-    QuitMenuItem = true;
-    FXPreferredViewStyle = "List";
-    CreateDesktop = false;
-  };
-
-  system.defaults.trackpad = {
-    Clicking = true;
-    TrackpadRightClick = true;
-    TrackpadThreeFingerDrag = false;
-    Dragging = true;
-  };
+  imports = [
+    ./clock.nix
+    ./dock.nix
+    ./finder.nix
+    ./keyboard.nix
+    ./screensaver.nix
+    ./trackpad.nix
+  ];
 
   system.defaults.NSGlobalDomain = {
     AppleShowAllFiles = true;
@@ -74,26 +53,8 @@
     };
   };
 
-  system.defaults.screensaver = {
-    askForPassword = true;
-  };
-
-  system.defaults.loginwindow = {
-    GuestEnabled = false;
-    ShutDownDisabled = true;
-    SleepDisabled = true;
-    RestartDisabled = true;
-    ShutDownDisabledWhileLoggedIn = true;
-    PowerOffDisabledWhileLoggedIn = true;
-    RestartDisabledWhileLoggedIn = true;
-    DisableConsoleAccess = true;
-  };
-
-  system.defaults.menuExtraClock = {
-    Show24Hour = true;
-    ShowDate = 0;
-    ShowDayOfMonth = true;
-    ShowSeconds = true;
+  system.defaults.smb = {
+    NetBIOSName = "mbpromax";
   };
 
   system.defaults.alf = { # firewall
@@ -140,4 +101,5 @@
       </dict>
     "
   '';
+
 }

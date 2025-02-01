@@ -1,4 +1,4 @@
-{username, ...}:
+{ username, ... }:
 
 {
   home.username = username;

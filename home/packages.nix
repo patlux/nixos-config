@@ -11,6 +11,8 @@
     p7zip
 
     neovim
+    eza
+    pinentry-curses
 
     # for neovim
     tree-sitter

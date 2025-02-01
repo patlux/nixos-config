@@ -1,24 +1,39 @@
-{ ... }:
+{ config, ... }:
 
 {
-  programs.starship = {
+  programs.zsh = {
     enable = true;
-    settings = {
-      add_newline = false;
-      aws.disabled = true;
-      gcloud.disabled = true;
-      line_break.disabled = true;
-    };
-  };
-
-
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
     shellAliases = {
-      ll = "ls -lah";
-      gs = "git status";
-      update = "sudo nixos-rebuild switch --flake ~/.config/nixos#nixos";
+      mkdir = "mkdir -p -v";
+      aic = "aider --model r1 --no-attribute-author --no-attribute-committer";
+      dgit = "git --git-dir ~/.dotfiles/.git --work-tree=$HOME";
+      ls = "eza";
+      ll = "eza -l";
+      la = "eza -a";
+      lt = "eza --tree";
+      lla = "eza -la" ;
+    };
+    history = {
+      size = 10000;
+      path = "${config.xdg.dataHome}/zsh/history";
+    };
+
+    prezto = {
+      enable = true;
+      editor = { keymap = "vi"; };
+      pmodules = [
+        "environment"
+        "terminal"
+        "editor"
+        "history"
+        "directory"
+        "spectrum"
+        "utility"
+        "completion"
+        "history-substring-search"
+        "prompt"
+        "git"
+      ];
     };
   };
 }

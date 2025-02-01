@@ -1,5 +1,5 @@
 {
-  description = "My flake config";
+  description = "nixOS configurations of patwoz";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
@@ -30,6 +30,8 @@
           }
         ];
       };
+
+      # nix-darwin (TODO)
 
     };
   };

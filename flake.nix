@@ -14,15 +14,19 @@
     nixosConfigurations = {
 
       # nixOS in UTM
-      nixos = nixpkgs.lib.nixosSystem {
+      nixos = let
+        username = "patwoz";
+        specialArgs = {inherit username;};
+      in nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
           ./hosts/nixos
-          ./users/patwoz/nixos.nix
+          ./users/${username}/nixos.nix
 
           home-manager.nixosModules.home-manager
           {
-            home-manager.users.patwoz = import ./users/patwoz/home.nix;
+            home-manager.extraSpecialArgs = inputs // specialArgs;
+            home-manager.users.${username} = import ./users/${username}/home.nix;
           }
         ];
       };

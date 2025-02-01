@@ -10,6 +10,8 @@
     unzip # for neovim
     p7zip
 
+    neovim
+
     # for neovim
     tree-sitter
     fzf

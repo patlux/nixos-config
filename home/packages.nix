@@ -54,7 +54,8 @@
     gnupg
 
     btop  # replacement of htop/nmon
-    iotop # io monitoring
+    # not available on mac
+    # iotop # io monitoring
     iftop # network monitoring
   ];
 

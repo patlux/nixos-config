@@ -3,6 +3,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   time.timeZone = "Europe/Berlin";
+  # only linux (not darwin)
   # i18n.defaultLocale = "en_US.UTF-8";
   environment.variables.LC_ALL = "en_US.UTF-8";
 

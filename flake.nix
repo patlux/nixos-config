@@ -15,34 +15,24 @@
     };
   };
 
-  outputs = { self, nixpkgs, nix-darwin, home-manager, ... }@inputs: {
-    nixosConfigurations = {
+  outputs = { nixpkgs, nix-darwin, home-manager, ... }: {
 
-      # nixOS in UTM
-      nixos = let
-        username = "patwoz";
-        specialArgs = {inherit username;};
-      in nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        modules = [
-          ./hosts/nixos
-          ./users/${username}/nixos.nix
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.extraSpecialArgs = inputs // specialArgs;
-            home-manager.users.${username} = import ./users/${username}/home.nix;
-          }
-        ];
-      };
-
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [
+        home-manager.nixosModules.home-manager
+        ./hosts/nixos
+        # {
+        #   home-manager.extraSpecialArgs = inputs // specialArgs;
+        #   home-manager.users.${username} = import ./users/${username}/home.nix;
+        # }
+      ];
     };
+
 
     darwinConfigurations.mbpromax = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
-          # ./users/patwoz/nixos.nix
-
 	        home-manager.darwinModules.home-manager
           ./hosts/mbpromax
         ];

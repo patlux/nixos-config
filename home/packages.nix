@@ -2,6 +2,9 @@
 
 {
 
+  programs.fzf.enable = true;
+  programs.fzf.defaultCommand = "fd --type file --hidden --exclude .git";
+
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     # archives
@@ -26,10 +29,10 @@
     lazygit
     picocom
     uv
+    bat
 
     # for neovim
     tree-sitter
-    fzf
     go
     gofumpt
     gopls

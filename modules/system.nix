@@ -10,4 +10,6 @@
   environment.variables.VISUAL = "nvim";
 
   services.openssh.enable = true;
+
+  nixpkgs.config.allowUnfree = true;
 }

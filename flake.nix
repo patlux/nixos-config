@@ -22,13 +22,8 @@
       modules = [
         home-manager.nixosModules.home-manager
         ./hosts/nixos
-        # {
-        #   home-manager.extraSpecialArgs = inputs // specialArgs;
-        #   home-manager.users.${username} = import ./users/${username}/home.nix;
-        # }
       ];
     };
-
 
     darwinConfigurations.mbpromax = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";

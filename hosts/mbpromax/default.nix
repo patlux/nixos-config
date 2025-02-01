@@ -5,6 +5,7 @@
     [
       ../../modules/system.nix
       ../../modules/packages.nix
+      ./darwin.nix
     ];
   #
   # # system.configurationRevision = self.rev or self.dirtyRev or null;

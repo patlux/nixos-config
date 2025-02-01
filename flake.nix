@@ -4,8 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
 
-    nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-24.11";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin/nix-darwin-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
@@ -36,26 +38,14 @@
 
     };
 
-    darwinConfigurations = {
-
-      # nix on macOS
-      mbpromax = let
-        username = "patwoz";
-        specialArgs = {inherit username;};
-      in nix-darwin.lib.darwinSystem {
+    darwinConfigurations.mbpromax = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
+          # ./users/patwoz/nixos.nix
+
+	        home-manager.darwinModules.home-manager
           ./hosts/mbpromax
-          ./users/${username}/nixos.nix
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.extraSpecialArgs = inputs // specialArgs;
-            home-manager.users.${username} = import ./users/${username}/home.nix;
-          }
         ];
-      };
-
     };
 
   };

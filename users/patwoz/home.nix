@@ -1,35 +1,34 @@
-{ config, pkgs, ... }:
-
 {
   home.username = "patwoz";
   home.homeDirectory = "/home/patwoz";
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
-    neofetch
-    nnn # terminal file manager
-
     # archives
     zip
     xz
-    unzip
+    unzip # for neovim
     p7zip
 
-    # utils
-    ripgrep # recursively searches directories for a regex pattern
-    jq # A lightweight and flexible command-line JSON processor
-    eza # A modern replacement for ‘ls’
-    fzf # A command-line fuzzy finder
+    # for neovim
+    tree-sitter
+    fzf
+    go
+    gofumpt
+    gopls
+    cargo
 
-    # networking tools
+    ripgrep # recursively searches directories for a regex pattern
+    jq # json parser
+
     dnsutils  # `dig` + `nslookup`
 
-    cowsay
     file
     which
     tree
     gnused
     gnutar
+    gnumake
     gawk
     zstd
     gnupg
@@ -59,6 +58,11 @@
   programs.bash = {
     enable = true;
     enableCompletion = true;
+    shellAliases = {
+      ll = "ls -lah";
+      gs = "git status";
+      update = "sudo nixos-rebuild switch --flake ~/.config/nixos#nixos";
+    };
   };
 
   home.stateVersion = "24.11";

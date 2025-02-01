@@ -11,16 +11,22 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
-      modules = [
-        ./configuration.nix
+    nixosConfigurations = {
 
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.users.patwoz = import ./home.nix;
-        }
-      ];
+      # nixOS in UTM
+      nixos = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [
+          ./hosts/nixos
+          ./users/patwoz/nixos.nix
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.users.patwoz = import ./users/patwoz/home.nix;
+          }
+        ];
+      };
+
     };
   };
 }

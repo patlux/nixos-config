@@ -1,8 +1,4 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports =
@@ -19,16 +15,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   environment.variables.EDITOR = "nvim";
-
-  users.users.patwoz = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-      tree
-      neovim
-      git
-    ];
-  };
 
   programs.firefox.enable = true;
   programs.sway.enable = true;

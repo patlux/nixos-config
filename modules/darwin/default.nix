@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./brew.nix
     ./clock.nix
     ./dock.nix
     ./finder.nix
@@ -12,6 +13,8 @@
     ./skhd.nix
     ./yabai.nix
   ];
+
+  security.pam.enableSudoTouchIdAuth = true;
 
   system.defaults.NSGlobalDomain = {
     "com.apple.sound.beep.feedback" = 0;

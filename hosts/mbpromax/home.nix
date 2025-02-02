@@ -11,6 +11,7 @@
     ../../home/ruby.nix
     ../../home/shell.nix
     ../../modules/darwin/backup
+    ../../modules/darwin/backup/cronjob.nix
     ../../modules/darwin/home/keyboard.nix
   ];
 

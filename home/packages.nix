@@ -33,7 +33,6 @@
     picocom
     uv
     bat
-    duplicacy
 
     # for neovim
     tree-sitter

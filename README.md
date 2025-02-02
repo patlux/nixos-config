@@ -23,9 +23,7 @@ NIXNAME=nixos make
 
 ## Maintenance
 
-```
-
-```
+TODO
 
 ## Tools
 
@@ -58,6 +56,8 @@ Use the [online tool](https://hidutil-generator.netlify.app) to generate the jso
 
 To block ads I'm using [MattiSG/adblock](https://github.com/MattiSG/adblock).
 
-## 🦸‍♂️⤵️
+## Author
 
-Created with 🔥 by [@de_patwoz](https://twitter.com/de_patwoz)
+Created by [Patrick Wozniak](https://patwoz.dev)
+
+I'm a software developer who discovered my passion for coding at the age of 16, and since then, I've become an experienced frontend engineer with a strong focus on JavaScript/TypeScript and React/React Native.

@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./brew.nix
     ./clock.nix
     ./dock.nix
     ./finder.nix
@@ -12,6 +11,8 @@
 
     ./skhd.nix
     ./yabai.nix
+
+    ./brew.nix
   ];
 
   security.pam.enableSudoTouchIdAuth = true;
@@ -63,8 +64,8 @@
 
   system.activationScripts.postUserActivation.text = ''
     printf "disabling spotlight indexing... "
-    mdutil -i off -d / &> /dev/null
-    mdutil -E / &> /dev/null
+    sudo mdutil -a -i off
+    sudo mdutil -E /
     echo "ok"
 
     # Show the ~/Library folder.

@@ -11,6 +11,7 @@
     ../../home/ruby.nix
     ../../home/shell.nix
     ../../modules/darwin/backup
+    ../../modules/darwin/home/keyboard.nix
   ];
 
   programs.zsh.shellAliases.update = "darwin-rebuild switch --flake ~/.config/nixos\\#mbpromax";

@@ -6,7 +6,7 @@
   ];
 
   programs.zsh.initExtra = "
-    eval \"$(~/.nix-profile/bin/mise activate zsh)\"
+    eval \"$(/etc/profiles/per-user/patwoz/bin/mise activate zsh)\"
   ";
 
 }

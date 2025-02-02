@@ -10,6 +10,7 @@
     ../../home/packages.nix
     ../../home/ruby.nix
     ../../home/shell.nix
+    ../../modules/darwin/backup
   ];
 
   programs.zsh.shellAliases.update = "darwin-rebuild switch --flake ~/.config/nixos\\#mbpromax";

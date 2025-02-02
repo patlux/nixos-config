@@ -21,10 +21,10 @@
     mouse_action2 = "resize";
     mouse_drop_action = "swap";
     layout = "bsp";
-    top_padding = 12;
-    bottom_padding = 12;
-    left_padding = 12;
-    right_padding = 12;
+    top_padding = 10;
+    bottom_padding = 10;
+    left_padding = 10;
+    right_padding = 10;
     window_gap = 6;
   };
 

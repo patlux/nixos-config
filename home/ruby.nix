@@ -6,12 +6,7 @@
   ];
 
   home.file.".gemrc".source = ./files/.gemrc;
-
-  home.file.Gemfile.text = ''
-source 'https://rubygems.org'
-
-gem 'cocoapods'
-  '';
+  home.file.Gemfile.source = ./files/Gemfile;
 
   programs.zsh.initExtra = "
     if [ $(mise ls ruby | wc -l) -gt 1 ]; then

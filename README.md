@@ -14,8 +14,11 @@ My personal nixos configurations for my linux and macOS machines.
 git clone https://github.com/patlux/nixos-config
 cd nixos-config
 
+# On macOS install brew first: https://brew.sh/
+
 # on Macbook Pro
 make
+# Additional steps in ./SETUP_MACOS.md
 
 # on NixOS
 NIXNAME=nixos make

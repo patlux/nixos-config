@@ -29,49 +29,6 @@ If you do this on "VirtualBuddy", don't forget to start "VirtualBuddyGuest":
 
 For Copy/Paste between Host and Virtual Machine.
 
-Also run the following to optimize the vm:
-
-See https://github.com/sickcodes/osx-optimizer for more.
-
-```sh
-# Skip the GUI login screen
-defaults write com.apple.loginwindow autoLoginUser -bool true
-
-# Disable motion and transparency
-defaults write com.apple.Accessibility DifferentiateWithoutColor -int 1
-defaults write com.apple.Accessibility ReduceMotionEnabled -int 1
-defaults write com.apple.universalaccess reduceMotion -int 1
-defaults write com.apple.universalaccess reduceTransparency -int 1
-
-# Multi session
-sudo /usr/bin/defaults write .GlobalPreferences MultipleSessionsEnabled -bool TRUE
-defaults write "Apple Global Domain" MultipleSessionsEnabled -bool true
-
-# Disable updates
-sudo su
-defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool false
-defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool false
-defaults write com.apple.commerce AutoUpdate -bool false
-defaults write com.apple.commerce AutoUpdateRestartRequired -bool false
-defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 0
-defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 0
-defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 0
-defaults write com.apple.SoftwareUpdate AutomaticDownload -int 0
-
-# Enable osascript over SSH automatically without sshd-keygen warning and full disk access
-defaults write com.apple.universalaccessAuthWarning /System/Applications/Utilities/Terminal.app -bool true
-defaults write com.apple.universalaccessAuthWarning /usr/libexec -bool true
-defaults write com.apple.universalaccessAuthWarning /usr/libexec/sshd-keygen-wrapper -bool true
-defaults write com.apple.universalaccessAuthWarning com.apple.Messages -bool true
-defaults write com.apple.universalaccessAuthWarning com.apple.Terminal -bool true
-
-# Disable lock screen
-defaults write com.apple.loginwindow DisableScreenLock -bool true
-
-# Disable saving the application state on shutdown
-defaults write com.apple.loginwindow TALLogoutSavesState -bool false
-```
-
 ### Install Xcode command line tools
 
 Open Terminal via Spotlight (CMD + Space)
@@ -86,87 +43,10 @@ sudo xcode-select --switch /Library/Developer/CommandLineTools
 sudo xcodebuild -license
 ```
 
-### Setup brew & nix
-
-Install brew
-
-```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-Install nix (https://nixos.org/download.html#nix-install-macos)
-
-```sh
-# Optionally
-sudo rm -f /etc/bashrc.backup-before-nix
-sudo rm -f /etc/zshrc.backup-before-nix
-sudo rm -f /etc/bash.bashrc.backup-before-nix
-sudo rm -f /etc/nix/nix.conf
-
-# Required
-sh <(curl -L https://nixos.org/nix/install)
-
-# Enter 4x "y"
-# Enter Password
-
-# When done, close the current and open a new terminal
-```
-
-Install home-manager (https://github.com/LnL7/nix-darwin)
-
-```sh
-# Make sure you logged out and logged in again
-
-# Install home-manager (adds configurations options for home)
-nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
-nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
-nix-channel --update
-nix-shell '<home-manager>' -A install
-# If error occurs, check the error if there is something wrong in $HOME/.config/home-manager/configuration.nix
-
-# Install darwin module (adds configurations options for macos)
-nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A darwin-rebuild
-./result/bin/darwin-rebuild switch -I darwin-config=$HOME/.config/nix-darwin/configuration.nix
-```
-
-### Setup dotfiles
-
-```sh
-cd ~/
-git clone https://github.com/patlux/dotfiles.git .dotfiles
-cd .dotfiles
-./.bin/dotfiles-bootstrap.sh
-# On VirtualBuddy: rm -f Library/LaunchAgents/de.patwoz.KeyRemapping.plist
-# Otherwise ESC will not work
-
-# If not already done, open a new terminal window to make it work
-darwin-rebuild switch
-home-manager switch # creates the ~/.zshrc
-```
-
 ### Install tools
 
 ```sh
-curl https://mise.run | sh
-# close and open new terminal
-mise install
-
-# install gems (cocoapods)
-bundle install
-
-# Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-2) Customize install to not modify path
-
-cd ~/.dotfiles
-brew bundle
-
-yabai --start-service
-skhd --start-service
-
-# https://github.com/MattiSG/adblock
 sudo adblock on
-npm install -g tree-sitter-cli
 ```
 
 Setup `llm`:
@@ -297,5 +177,3 @@ sudo security import AppleWWDRCAG3.cer -k /Library/Keychains/System.keychain
 ```
 
 This fixes `Distribution certificate with fingerprint EAF3A00C1FC18283CACFEDC21AD6BB37EB993438 hasn't been imported successfully`
-
-#### TODO: Setup Little Snitch

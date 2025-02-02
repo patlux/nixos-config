@@ -2,14 +2,18 @@
 
 {
   homebrew.enable = true;
+  homebrew.taps = [
+    "mattisg/mattisg" # adblock
+    "xcodesorg/made" # xcodes
+  ];
   homebrew.brews = [
     "pkg-config"
     "ios-deploy"
-    "mattisg/mattisg/adblock"
+    "adblock"
   ];
   homebrew.casks = [
     "wezterm"
-    "xcodesorg/made/xcodes"
+    "xcodes"
     #  TODO: replace in home.nix as package
     "font-meslo-lg-nerd-font"
     "betterdisplay"

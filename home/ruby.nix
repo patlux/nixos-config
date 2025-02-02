@@ -6,7 +6,7 @@
   ];
 
   home.file.".gemrc".source = ./files/.gemrc;
-  home.file.Gemfile.source = ./files/Gemfile;
+  home.file.".default-gems".source = ./files/.default-gems;
 
   programs.zsh.initExtra = "
     if [ $(mise ls ruby | wc -l) -gt 1 ]; then

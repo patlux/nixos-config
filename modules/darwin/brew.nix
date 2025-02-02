@@ -31,7 +31,6 @@
     "timing"
     "ghostty"
     "libreoffice"
-    "duplicacy-cli"
     "gimp"
     "discord"
     "imageoptim"

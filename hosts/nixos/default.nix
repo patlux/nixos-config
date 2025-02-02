@@ -16,6 +16,8 @@
   users.defaultUserShell = pkgs.zsh;
 
   home-manager = {
+    useUserPackages = true;
+    useGlobalPkgs = true;
     users.patwoz = {
       imports = [./home.nix];
       home = {

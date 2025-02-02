@@ -22,6 +22,8 @@
   services.nix-daemon.enable = true;
 
   home-manager = {
+    useUserPackages = true;
+    useGlobalPkgs = true;
     users.patwoz = {
       imports = [./home.nix];
       home = {

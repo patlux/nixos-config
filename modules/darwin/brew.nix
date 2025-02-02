@@ -38,5 +38,6 @@
     "appcleaner"
     "gpg-suite"
     "minisim"
+    "virtualbuddy"
   ];
 }

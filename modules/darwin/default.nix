@@ -8,23 +8,20 @@
     ./keyboard.nix
     ./screensaver.nix
     ./trackpad.nix
+
+    ./skhd.nix
+    ./yabai.nix
   ];
 
   system.defaults.NSGlobalDomain = {
-    AppleShowAllFiles = true;
-    AppleShowAllExtensions = true;
-    InitialKeyRepeat = 12;
-    KeyRepeat = 2;
     "com.apple.sound.beep.feedback" = 0;
     AppleInterfaceStyleSwitchesAutomatically = true;
     AppleEnableSwipeNavigateWithScrolls = true;
     NSAutomaticWindowAnimationsEnabled = false;
+    NSAutomaticSpellingCorrectionEnabled = false;
     NSTableViewDefaultSizeMode = 1;
-    ApplePressAndHoldEnabled = true;
     NSWindowResizeTime = 0.001;
     AppleFontSmoothing = 2;
-    NSWindowShouldDragOnGesture = true;
-    "com.apple.trackpad.scaling" = 3.0;
   };
 
   system.defaults.CustomUserPreferences = {

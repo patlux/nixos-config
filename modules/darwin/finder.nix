@@ -14,4 +14,10 @@
     CreateDesktop = false;
   };
 
+
+  system.defaults.NSGlobalDomain = {
+    AppleShowAllFiles = true;
+    AppleShowAllExtensions = true;
+  };
+
 }

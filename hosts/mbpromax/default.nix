@@ -7,9 +7,6 @@
       ../../modules/packages.nix
       ../../modules/darwin
     ];
-  #
-  # # system.configurationRevision = self.rev or self.dirtyRev or null;
-  #
 
   networking.hostName = "mbpromax";
   networking.computerName = "mbpromax";

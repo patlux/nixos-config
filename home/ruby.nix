@@ -5,9 +5,7 @@
     ruby
   ];
 
-  home.file.".gemrc".text = ''
-    gem: --user-install --env-shebang --no-document
-  '';
+  home.file.".gemrc".source = ./files/.gemrc;
 
   home.file.Gemfile.text = ''
 source 'https://rubygems.org'

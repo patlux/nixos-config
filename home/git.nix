@@ -6,6 +6,8 @@
     userName = "Patrick Wozniak";
     userEmail = "email@patwoz.de";
 
+    lfs.enable = true;
+
     signing.key = "0D4DE3BE5B9D660B";
     signing.signByDefault = true;
     delta = { enable = true; };

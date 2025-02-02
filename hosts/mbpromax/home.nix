@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 
 {
@@ -13,4 +13,14 @@
   ];
 
   programs.zsh.shellAliases.update = "darwin-rebuild switch --flake ~/.config/nixos\\#mbpromax";
+
+  home.packages = with pkgs; [
+    pixman
+    cairo
+    pango
+    dive
+    scrcpy
+    apktool
+  ];
+    
 }

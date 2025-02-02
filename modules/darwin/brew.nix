@@ -54,4 +54,12 @@
     "TestFlight" = 899247664;
     "WireGuard" = 1451685025;
   };
+
+  system.activationScripts.postUserActivation = {
+      enable = true;
+      text = ''
+        echo "Enable Adblock"
+        sudo /opt/homebrew/bin/adblock on
+      '';
+  };
 }

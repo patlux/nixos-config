@@ -45,10 +45,6 @@ sudo xcodebuild -license
 
 ### Install tools
 
-```sh
-sudo adblock on
-```
-
 Setup `llm`:
 
 ```sh

@@ -25,6 +25,14 @@
       ];
     };
 
+    nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        home-manager.nixosModules.home-manager
+        ./hosts/wsl
+      ];
+    };
+
     darwinConfigurations.mbpromax = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [

@@ -11,6 +11,7 @@
     ../../home/packages.nix
     ../../home/ruby.nix
     ../../home/shell.nix
+    ../../home/wezterm.nix
     ../../modules/darwin/backup
     ../../modules/darwin/backup/cronjob.nix
     ../../modules/darwin/home/keyboard.nix

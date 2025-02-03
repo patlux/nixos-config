@@ -5,9 +5,6 @@
   programs.fzf.enable = true;
   programs.fzf.defaultCommand = "fd --type file --hidden --exclude .git";
 
-  home.file.".config/mise/config.toml".source = ./files/mise-config.toml;
-  home.file.".config/wezterm/wezterm.lua".source = ./files/wezterm.lua;
-
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     # archives

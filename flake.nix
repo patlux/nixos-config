@@ -13,9 +13,14 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-wsl = {
+      url = "github:nix-community/nixos-wsl";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, nix-darwin, home-manager, ... }: {
+  outputs = { nixpkgs, nix-darwin, nixos-wsl, home-manager, ... }: {
 
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
@@ -28,8 +33,16 @@
     nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        home-manager.nixosModules.home-manager
-        ./hosts/wsl
+        {
+          wsl = {
+            enable = true;
+          };
+        }
+        nixos-wsl.nixosModules.default
+        {
+          system.stateVersion = "24.11";
+          wsl.enable = true;
+        }
       ];
     };
 

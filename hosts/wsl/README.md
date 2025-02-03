@@ -34,7 +34,9 @@ Host wsl
   IdentityFile ~/.ssh/id_rsa
 ```
 
-4. Setup nix
+4. [Install nix](https://github.com/DeterminateSystems/nix-installer?tab=readme-ov-file#determinate-nix-installer)
+
+5. Setup nixos-config
 
 ```sh
 ssh wsl

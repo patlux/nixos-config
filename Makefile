@@ -9,3 +9,8 @@ ifeq ($(UNAME), Darwin)
 else
 	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#${NIXNAME}"
 endif
+
+# Build a WSL installer
+.PHONY: wsl
+wsl:
+	 nix build ".#nixosConfigurations.wsl.config.system.build.installer"

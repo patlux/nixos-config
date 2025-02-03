@@ -13,4 +13,4 @@ endif
 # Build a WSL installer
 .PHONY: wsl
 wsl:
-	 nix build ".#nixosConfigurations.wsl.config.system.build.installer"
+	nix build ".#nixosConfigurations.wsl.config.system.build.toplevel"

@@ -33,16 +33,24 @@
     nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
+        nixos-wsl.nixosModules.default
         {
           wsl = {
             enable = true;
+
+            wslConf = {
+              automount.root = "/mnt";
+              network.generateResolvConf = false;
+            };
+
+            defaultUser = "patwoz";
+            startMenuLaunchers = true;
           };
-        }
-        nixos-wsl.nixosModules.default
-        {
+
           system.stateVersion = "24.11";
-          wsl.enable = true;
         }
+        home-manager.nixosModules.home-manager
+        # ./hosts/wsl
       ];
     };
 

@@ -42,6 +42,7 @@
     "minisim"
     "virtualbuddy"
     "timing"
+    "rustdesk"
   ];
   homebrew.masApps = {
     "AdGuard for Safari" = 1440147259;

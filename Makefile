@@ -10,7 +10,8 @@ else
 	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#${NIXNAME}"
 endif
 
-# Build a WSL installer
-.PHONY: wsl
+orbubu:
+	nix run home-manager/master -- switch --flake .#orbubu
+
 wsl:
 	nix build ".#nixosConfigurations.wsl.config.system.build.toplevel"

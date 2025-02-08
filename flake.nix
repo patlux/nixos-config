@@ -22,6 +22,8 @@
 
   outputs = { nixpkgs, nix-darwin, nixos-wsl, home-manager, ... }: {
 
+    # NixOS
+
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [
@@ -30,13 +32,16 @@
       ];
     };
 
-    nixosConfigurations.orbubu = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
+    # Home Manager
+
+    homeConfigurations.orbubu = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.aarch64-linux;
       modules = [
-        home-manager.nixosModules.home-manager
-        ./hosts/orbubu
+        ./hosts/orbubu/home.nix
       ];
     };
+
+    # WSL
 
     nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -61,6 +66,8 @@
         # ./hosts/wsl
       ];
     };
+
+    # macOS
 
     darwinConfigurations.mbpromax = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";

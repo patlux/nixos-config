@@ -7,6 +7,12 @@
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
+    gcc
+    git
+    vim
+    wget
+    file
+
     # archives
     zip
     xz

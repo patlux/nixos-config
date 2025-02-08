@@ -4,7 +4,6 @@
   imports =
     [
       ../../modules/system.nix
-      ../../modules/packages.nix
     ];
 
   programs.zsh.enable = true;

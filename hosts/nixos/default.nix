@@ -5,7 +5,6 @@
     [
       ./hardware-configuration.nix
       ../../modules/system.nix
-      ../../modules/packages.nix
     ];
 
   users.users.patwoz = {

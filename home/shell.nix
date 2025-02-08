@@ -49,12 +49,13 @@
   };
 
   home.sessionPath = [
-    # TODO: only for mac
-    "/opt/homebrew/bin"
-    "/opt/homebrew/sbin"
     "${config.home.homeDirectory}/.local/bin"
     "${config.home.homeDirectory}/.bin"
     "${config.home.homeDirectory}/.bin/bin"
+    "${config.home.homeDirectory}/.bun/bin"
+    # TODO: only for mac
+    "/opt/homebrew/bin"
+    "/opt/homebrew/sbin"
   ];
 }
 

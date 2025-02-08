@@ -19,7 +19,6 @@
     unzip # for neovim
     p7zip
 
-    neovim
     eza # ls alternative
     pinentry-curses
     delta # better diff

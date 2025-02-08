@@ -30,6 +30,14 @@
       ];
     };
 
+    nixosConfigurations.orbubu = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [
+        home-manager.nixosModules.home-manager
+        ./hosts/orbubu
+      ];
+    };
+
     nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [

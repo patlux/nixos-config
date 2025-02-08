@@ -4,11 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
 
-    nixpkgs-unstable = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-darwin = {
       url = "github:LnL7/nix-darwin/nix-darwin-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,7 +20,7 @@
     };
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, nix-darwin, nixos-wsl, home-manager, ... }: {
+  outputs = { nixpkgs, nix-darwin, nixos-wsl, home-manager, ... }: {
 
     # NixOS
 

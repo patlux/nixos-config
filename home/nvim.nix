@@ -1,7 +1,6 @@
-{ nixpkgs-unstable, pkgs, ... }: 
+{ pkgs, ... }: 
 
 {
-  # home.packages = with nixpkgs-unstable; [
   home.packages = with pkgs; [
     neovim
   ];

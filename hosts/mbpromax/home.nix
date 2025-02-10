@@ -15,7 +15,6 @@
     ../../home/wezterm.nix
     ../../modules/darwin/backup
     ../../modules/darwin/backup/cronjob.nix
-    ../../modules/darwin/home/keyboard.nix
   ];
 
   programs.zsh.shellAliases.update = "darwin-rebuild switch --flake ~/.config/nixos\\#mbpromax";

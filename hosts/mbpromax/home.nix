@@ -3,6 +3,7 @@
 
 {
   imports = [
+    ../../home/android.nix
     ../../home/core.nix
     ../../home/git.nix
     ../../home/gnupg.nix
@@ -18,6 +19,10 @@
   ];
 
   programs.zsh.shellAliases.update = "darwin-rebuild switch --flake ~/.config/nixos\\#mbpromax";
+
+  programs.zsh.initExtra = ''
+    ssh-add --apple-load-keychain 2> /dev/null
+  '';
 
   home.packages = with pkgs; [
     pixman

@@ -16,16 +16,10 @@
       zig = "0.13.0";
       go = "1.23.1";
       yarn = "1.22.22";
-      bun = "1.2.0";
+      bun = "1.2.2";
     };
   };
 
   home.file.".default-npm-packages".source = ./files/.default-npm-packages;
-  # home.file.".config/mise/config.toml".source = ./files/mise-config.toml;
-
-  # programs.zsh.initExtra = "
-  #   eval \"$(/etc/profiles/per-user/patwoz/bin/mise activate zsh)\"
-  # ";
-
 }
 

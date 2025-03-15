@@ -73,10 +73,6 @@
         contents.user.email = "p.wozniak@enerparc.com";
         contents.commit.gpgSign = false;
       }
-      {
-        condition = "gitdir:~/dev/ibm/";
-        contents.user.email = "Patrick.Wozniak@ext.aperto.com";
-      }
     ];
   };
 }

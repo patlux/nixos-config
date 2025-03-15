@@ -35,6 +35,8 @@
     picocom
     uv
     bat
+    libavif # avif image format
+    k6
 
     # for neovim
     tree-sitter

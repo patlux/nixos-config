@@ -16,6 +16,9 @@ vim.opt.title = true
 -- vim.opt.titlestring = "%{expand('%:p') != '' ? expand('%:p') : '[No File]'} - nvim"
 vim.opt.titlestring = "%{expand('%:p') != '' ? expand('%:p') : getcwd()} - nvim"
 
+-- https://github.com/oven-sh/bun/issues/8520#issuecomment-2585256608
+vim.opt.backupcopy = "yes"
+
 vim.g.snacks_animate = false
 
 vim.api.nvim_create_user_command("Cppath", function()

@@ -12,6 +12,7 @@
     vim
     wget
     file
+    autossh
 
     # archives
     zip

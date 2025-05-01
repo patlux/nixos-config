@@ -15,7 +15,7 @@
     ../../home/wezterm.nix
   ];
 
-  programs.zsh.shellAliases.update = "darwin-rebuild switch --flake ~/.config/nixos\\#mbpromax";
+  programs.zsh.shellAliases.update = "darwin-rebuild switch --flake ~/.config/nixos\\#mmm1";
 
   programs.zsh.initExtra = ''
     ssh-add --apple-load-keychain 2> /dev/null

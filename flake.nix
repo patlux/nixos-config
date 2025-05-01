@@ -77,5 +77,13 @@
         ];
     };
 
+    darwinConfigurations.mmm1 = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = [
+	        home-manager.darwinModules.home-manager
+          ./hosts/mmm1
+        ];
+    };
+
   };
 }

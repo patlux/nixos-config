@@ -14,9 +14,10 @@
 shift + lctrl + alt - r : \
     /usr/bin/env osascript <<< \
         'display notification \"Restarting yabai\" with title \"yabai\"'; \
-    killall yabai; \
-    yabai --stop-service; \
-    yabai --start-service
+    launchctl kickstart -k gui/$(id -u)/org.nixos.yabai
+    # killall yabai; \
+    # yabai --stop-service; \
+    # yabai --start-service
 
 # Reload skhd 
 shift + lctrl + alt - s : \

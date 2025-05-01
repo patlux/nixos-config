@@ -6,13 +6,8 @@
 
     shellAliases = {
       mkdir = "mkdir -p -v";
-      aic = "aider --model r1 --no-attribute-author --no-attribute-committer";
-      dgit = "git --git-dir ~/.dotfiles/.git --work-tree=$HOME";
       ls = "eza";
       ll = "eza -l";
-      la = "eza -a";
-      lt = "eza --tree";
-      lla = "eza -la" ;
       k = "kubectl";
     };
 

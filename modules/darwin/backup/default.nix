@@ -59,6 +59,13 @@
 
   home.file."dev/.duplicacy/filters".text = ''
 -*/node_modules/
+-*/vendor/
+-*/.build/
+-*/build/
+-*/.build/
+-*/dist/
+-*/.zig-cache/
+-*/zig-out/
 -*/target/
 -*/Pods/
 -*/android/app/build/
@@ -66,6 +73,14 @@
 -*.aab
 -*.ipa
 -*.app/
+-*.tmp
+-*.swp
+-*.swo
+-*.log
+-*.class
+-*.DS_Store
+-*.idea/
+-*.vscode/
   '';
 
   home.file."dev/.duplicacy/preferences".text = ''

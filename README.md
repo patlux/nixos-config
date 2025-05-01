@@ -6,7 +6,7 @@ My personal nixos configurations for my linux and macOS machines.
 
 ## Bootstrap a new machine
 
-1. [Install nix](https://github.com/DeterminateSystems/nix-installer?tab=readme-ov-file#determinate-nix-installer)
+1. [Install nix](https://github.com/DeterminateSystems/nix-installer?tab=readme-ov-file#determinate-nix-installer) (Make sure to read also https://github.com/nix-darwin/nix-darwin: At this time it's recommended **not** to use the `Determinate Nix`)
 2. Run:
 
 ```sh

@@ -40,7 +40,7 @@ return {
       auto_suggestions_provider = "gemini",
       gemini = {
         -- endpoint = "https://generativelanguage.googleapis.com/v1beta/openai/",
-        model = "gemini-2.0-flash",
+        model = "gemini-2.5-flash-preview-04-17",
         api_key_name = "GOOGLE_AI_API_KEY",
         temperature = 0.0,
       },

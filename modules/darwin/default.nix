@@ -54,10 +54,6 @@
     };
   };
 
-  system.defaults.smb = {
-    NetBIOSName = "mbpromax";
-  };
-
   system.defaults.alf = { # firewall
     globalstate = 1; # enable
   };

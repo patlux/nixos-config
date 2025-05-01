@@ -13,6 +13,7 @@
       la = "eza -a";
       lt = "eza --tree";
       lla = "eza -la" ;
+      k = "kubectl";
     };
 
     history = {

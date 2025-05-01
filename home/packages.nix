@@ -5,6 +5,11 @@
   programs.fzf.enable = true;
   programs.fzf.defaultCommand = "fd --type file --hidden --exclude .git";
 
+  # only if mysql is installed by brew
+  programs.zsh.initExtra = "
+      export PATH=$PATH:/opt/homebrew/opt/mysql-client/bin
+  ";
+
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     gcc
@@ -19,6 +24,19 @@
     xz
     unzip # for neovim
     p7zip
+    mkcert
+
+    postgresql
+
+    # kubernetes / cloud
+    awscli2
+    terraform
+    skaffold
+    redis
+    eksctl
+    k3d
+    kubectl
+    kubectx
 
     eza # ls alternative
     pinentry-curses

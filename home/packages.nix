@@ -37,6 +37,11 @@
     k3d
     kubectl
     kubectx
+    k9s
+    tilt
+
+    # old version
+    # hurl # api tests
 
     eza # ls alternative
     pinentry-curses

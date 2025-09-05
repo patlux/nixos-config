@@ -36,6 +36,7 @@ config.keys = {
 	{ key = ",", mods = "SHIFT|CTRL", action = act.MoveTabRelative(-1) },
 	{ key = "+", mods = "CMD", action = act.IncreaseFontSize },
 	{ key = "n", mods = "OPT", action = act({ SendString = "~" }) },
+	-- { key = "l", mods = "CTRL", action = wezterm.action({ EmitEvent = "toggle-dark-mode" }) },
 	{
 		key = "t",
 		mods = "CMD",
@@ -50,5 +51,22 @@ config.keys = {
 		end),
 	},
 }
+
+-- toggle light/dark scheme with CTRL+l
+wezterm.on("toggle-dark-mode", function(window, pane)
+	-- local light_scheme = "Summerfruit Light (base16)"
+	local light_scheme = "Alabaster"
+	local dark_scheme = "Sonokai (Gogh)"
+	local overrides = window:get_config_overrides() or {}
+	wezterm.log_info("Current color scheme is: ", overrides.color_scheme)
+	if overrides.color_scheme == light_scheme then
+		wezterm.log_info("Setting to Dark Scheme: ", overrides.color_scheme)
+		overrides.color_scheme = dark_scheme
+	else
+		wezterm.log_info("Setting to Light ", overrides.color_scheme)
+		overrides.color_scheme = light_scheme
+	end
+	window:set_config_overrides(overrides)
+end)
 
 return config

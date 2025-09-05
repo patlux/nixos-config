@@ -6,7 +6,7 @@
   programs.fzf.defaultCommand = "fd --type file --hidden --exclude .git";
 
   # only if mysql is installed by brew
-  programs.zsh.initExtra = "
+  programs.zsh.initContent = "
       export PATH=$PATH:/opt/homebrew/opt/mysql-client/bin
   ";
 

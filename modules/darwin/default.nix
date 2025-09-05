@@ -15,7 +15,7 @@
     ./brew.nix
   ];
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   system.defaults.NSGlobalDomain = {
     "com.apple.sound.beep.feedback" = 0;
@@ -54,11 +54,10 @@
     };
   };
 
-  system.defaults.alf = { # firewall
-    globalstate = 1; # enable
-  };
+  networking.applicationFirewall.enable = true;
+  networking.applicationFirewall.blockAllIncoming = true;
 
-  system.activationScripts.postUserActivation.text = ''
+  system.activationScripts.activateSettings.text = ''
     printf "disabling spotlight indexing... "
     sudo mdutil -a -i off
     sudo mdutil -E /

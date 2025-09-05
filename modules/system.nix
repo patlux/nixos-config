@@ -1,6 +1,8 @@
 { ... }: {
 
+  nix.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.optimise.automatic = true;
 
   time.timeZone = "Europe/Berlin";
   environment.variables.LANG = "en_US.UTF-8";

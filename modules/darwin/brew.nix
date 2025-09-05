@@ -58,11 +58,8 @@
   #   "WireGuard" = 1451685025;
   # };
 
-  system.activationScripts.postUserActivation = {
-      enable = true;
-      text = ''
+  system.activationScripts.activateSettings.text = ''
         echo "Enable Adblock"
         sudo /opt/homebrew/bin/adblock on
-      '';
-  };
+  '';
 }

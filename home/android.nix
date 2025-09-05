@@ -1,7 +1,7 @@
 { ... }: 
 
 {
-  programs.zsh.initExtra = ''
+  programs.zsh.initContent = ''
     export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
     export ANDROID_HOME=$HOME/Library/Android/sdk
     # export ANDROID_AVD_HOME=/Volumes/home/VMS/Android-Emulator

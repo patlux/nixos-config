@@ -19,7 +19,7 @@
 
   programs.zsh.shellAliases.update = "darwin-rebuild switch --flake ~/.config/nixos\\#mbpromax";
 
-  programs.zsh.initExtra = ''
+  programs.zsh.initContent = ''
     ssh-add --apple-load-keychain 2> /dev/null
   '';
 

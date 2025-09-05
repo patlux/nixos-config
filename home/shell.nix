@@ -9,6 +9,7 @@
       ls = "eza";
       ll = "eza -l";
       k = "kubectl";
+      bazel = "bazelisk";
     };
 
     history = {

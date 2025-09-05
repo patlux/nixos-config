@@ -11,12 +11,14 @@
     globalConfig.tools = {
       ruby = "2.7.6";
       java = "adoptopenjdk-17.0.9+9";
-      node = "20.11.0";
+      node = "22.19.0";
       python = "3.12.2";
       zig = "0.13.0";
-      go = "1.23.1";
+      go = "1.25.1";
       yarn = "1.22.22";
-      bun = "1.2.10";
+      bun = "1.2.21";
+      # bazel = "8.2.1";
+      bazelisk = "1.26.0";
     };
   };
 

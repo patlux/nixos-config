@@ -1,9 +1,9 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    mise
-  ];
+  # home.packages = with pkgs; [
+  #   mise
+  # ];
 
   programs.mise = {
     enable = true;
@@ -19,6 +19,10 @@
       bun = "1.2.21";
       # bazel = "8.2.1";
       bazelisk = "1.26.0";
+    };
+
+    globalConfig.settings = {
+      idiomatic_version_file_enable_tools = ["node" "ruby"];
     };
   };
 

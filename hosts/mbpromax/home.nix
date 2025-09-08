@@ -17,7 +17,7 @@
     ../../modules/darwin/backup/cronjob.nix
   ];
 
-  programs.zsh.shellAliases.update = "darwin-rebuild switch --flake ~/.config/nixos\\#mbpromax";
+  programs.zsh.shellAliases.update = "sudo darwin-rebuild switch --flake ~/.config/nixos\\#mbpromax";
 
   programs.zsh.initContent = ''
     ssh-add --apple-load-keychain 2> /dev/null

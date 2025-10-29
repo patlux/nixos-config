@@ -10,6 +10,8 @@
       ll = "eza -l";
       k = "kubectl";
       bazel = "bazelisk";
+      android-talkback-enable = "adb shell settings put secure enabled_accessibility_services com.google.android.marvin.talkback/com.google.android.marvin.talkback.TalkBackService";
+      android-talkback-disable = "adb shell settings put secure enabled_accessibility_services com.android.talkback/com.google.android.marvin.talkback.TalkBackService";
     };
 
     history = {

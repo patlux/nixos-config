@@ -11,9 +11,9 @@
     globalConfig.tools = {
       ruby = "2.7.6";
       java = "adoptopenjdk-17.0.9+9";
-      node = "22.19.0";
+      node = "22.21.0";
       python = "3.12.2";
-      zig = "0.13.0";
+      zig = "0.15.1";
       go = "1.25.1";
       yarn = "1.22.22";
       bun = "1.2.21";

@@ -10,7 +10,7 @@
     persistent-apps = [
       # Not needed, it's already included
       # "/System/Library/CoreServices/Finder.app"
-      "/Applications/Arc.app"
+      "/Applications/Zen.app"
       "/Applications/WezTerm.app"
       "/System/Applications/Mail.app"
       "/System/Applications/Notes.app"

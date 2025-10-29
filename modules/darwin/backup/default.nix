@@ -11,6 +11,8 @@
 +.npmrc
 +.yarnrc.yml
 +.zshrc_secret
++.kube/
++.kube/*
 +.gnupg/
 +.gnupg/private-keys-v1.d/
 +.gnupg/private-keys-v1.d/*

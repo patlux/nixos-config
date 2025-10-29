@@ -2,7 +2,7 @@ return {
   "saghen/blink.cmp", -- Ensure the plugin is listed
   opts = {
     signature = { enabled = true },
-    fuzzy = { implementation = "prefer_rust_with_warning" },
+    fuzzy = { implementation = "rust" },
     completion = {
       keyword = { range = "full" },
       list = {

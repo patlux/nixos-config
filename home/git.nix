@@ -73,6 +73,11 @@
         contents.user.email = "p.wozniak@enerparc.com";
         contents.commit.gpgSign = false;
       }
+      {
+        condition = "gitdir:~/dev/mueller/";
+        contents.user.email = "wozniak.ext@mueller.de";
+        contents.commit.gpgSign = true;
+      }
     ];
   };
 }

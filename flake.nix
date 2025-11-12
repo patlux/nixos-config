@@ -16,6 +16,10 @@
       url = "github:nix-community/nixos-wsl";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay/e908e40b31632fc2bcda917dadee8c3ab8b46167"; # master
+    };
   };
 
   outputs = { nixpkgs, nix-darwin, nixos-wsl, home-manager, ... }: {

@@ -78,6 +78,11 @@
         contents.user.email = "wozniak.ext@mueller.de";
         contents.commit.gpgSign = true;
       }
+      {
+        condition = "gitdir:~/dev/ibm/";
+        contents.user.email = "patrick.wozniak1@ext.ibmix.de";
+        contents.commit.gpgSign = true;
+      }
     ];
   };
 }

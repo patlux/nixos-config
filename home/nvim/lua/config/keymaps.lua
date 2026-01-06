@@ -15,9 +15,6 @@ end
 map("n", "<leader>xj", diagnostic_goto(true), { desc = "Next Diagnostic" })
 map("n", "<leader>xk", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 
-vim.keymap.del("n", "<leader>ff")
-vim.keymap.del("n", "<leader>fg")
-
 -- local telescope = require("telescope.builtin")
 -- map("n", "<leader>si", function()
 --   telescope.live_grep({

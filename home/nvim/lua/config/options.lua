@@ -44,5 +44,3 @@ if vim.env.SSH_TTY then
     },
   }
 end
-
-vim.g.lazyvim_rust_diagnostics = "rust-analyzer"

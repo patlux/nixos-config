@@ -161,6 +161,36 @@ duplicacy restore -r <revision> "piparo.tech/*"
 3. Enter `afp://syno.camel-yo.ts.net`
 4. Authenticate
 
+### Setup Yabai
+
+Yabai requires accessibility permissions. Since nix-darwin changes the binary path on each rebuild, we use a stable symlink.
+
+1. Create a stable symlink (if not already done by nix):
+
+```sh
+sudo ln -sf /run/current-system/sw/bin/yabai /usr/local/bin/yabai
+```
+
+2. Stop yabai before changing permissions (to avoid screen freeze):
+
+```sh
+launchctl stop gui/$(id -u)/org.nixos.yabai
+```
+
+3. Grant accessibility permission:
+   - Open **System Settings > Privacy & Security > Accessibility**
+   - Remove any existing yabai entries
+   - Click **+** to add a new entry
+   - Press **Cmd + Shift + G** to open the "Go to folder" dialog
+   - Enter `/usr/local/bin/yabai` and press Enter
+   - Select the file and add it
+
+4. Start yabai:
+
+```sh
+launchctl start gui/$(id -u)/org.nixos.yabai
+```
+
 ### Other
 
 #### Install "Apple WWDR certificate"

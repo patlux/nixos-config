@@ -67,6 +67,11 @@
       "branch \"main\"".rebase = false;
     };
 
+    ignores = [
+      "opencode.json"
+      ".opencode/"
+    ];
+
     includes = [
       {
         condition = "gitdir:~/dev/enerparc/";

@@ -9,7 +9,7 @@
     enable = true;
 
     globalConfig.tools = {
-      ruby = "2.7.6";
+      ruby = "3.2.2";
       java = "adoptopenjdk-17.0.9+9";
       node = "22.21.0";
       python = "3.12.2";

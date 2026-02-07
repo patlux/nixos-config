@@ -6,6 +6,15 @@ setup:
 	git config core.hooksPath .githooks
 	@echo "Git hooks installed"
 
+preview:
+ifeq ($(UNAME), Darwin)
+	nix build ".#darwinConfigurations.${NIXNAME}.system"
+	nix store diff-closures /nix/var/nix/profiles/system ./result
+else
+	nixos-rebuild build --flake ".#${NIXNAME}"
+	nix store diff-closures /nix/var/nix/profiles/system ./result
+endif
+
 switch:
 ifeq ($(UNAME), Darwin)
 	nix build --extra-experimental-features nix-command --extra-experimental-features flakes ".#darwinConfigurations.${NIXNAME}.system"

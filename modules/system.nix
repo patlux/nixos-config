@@ -4,6 +4,11 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.optimise.automatic = true;
 
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 30d";
+  };
+
   time.timeZone = "Europe/Berlin";
   environment.variables.LANG = "en_US.UTF-8";
   environment.variables.LC_COLLATE = "en_US.UTF-8";

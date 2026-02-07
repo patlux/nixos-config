@@ -40,8 +40,6 @@
     "appcleaner"
     "gpg-suite"
     "minisim"
-    "virtualbuddy"
-    "timing"
     "rustdesk"
     "proxyman"
   ];

@@ -15,6 +15,7 @@
       ls = "eza";
       ll = "eza -l";
       k = "kubectl";
+      grep = "grep --color=auto";
       android-talkback-enable = "adb shell settings put secure enabled_accessibility_services com.google.android.marvin.talkback/com.google.android.marvin.talkback.TalkBackService";
       android-talkback-disable = "adb shell settings put secure enabled_accessibility_services com.android.talkback/com.google.android.marvin.talkback.TalkBackService";
     };
@@ -27,9 +28,6 @@
     initContent = ''
       # Directory stack (replaces prezto directory module)
       setopt AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_SILENT
-
-      # Colored output for grep (replaces prezto utility module)
-      export GREP_OPTIONS="--color=auto"
 
       GPG_TTY="$(tty)"
       export GPG_TTY

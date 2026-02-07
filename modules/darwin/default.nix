@@ -46,7 +46,7 @@
     "com.apple.NetworkBrowser" = {
       BrowseAllInterfaces = 1; 
     };
-    "com.assple.SoftwareUpdate" = {
+    "com.apple.SoftwareUpdate" = {
       ScheduleFrequency = 1;
     };
     "com.apple.terminal" = {

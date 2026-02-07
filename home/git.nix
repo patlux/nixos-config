@@ -18,7 +18,6 @@
       br = "branch";
       pushf = "push --force-with-lease";
       cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d";
-      dff = "difftool --no-symlinks --dir-diff";
     };
 
     extraConfig = {
@@ -42,16 +41,6 @@
         "diff".whitespace = "red reverse";
       };
       pull.rebase = false;
-      diff = {
-        tool = "kitty";
-        guitool = "kitty.gui";
-      };
-      difftool = {
-        prompt = false;
-        trustExitCode = true;
-        "kitty".cmd = "kitty +kitten diff $LOCAL $REMOTE";
-        "kitty.gui".cmd = "kitty kitty +kitten diff $LOCAL $REMOTE";
-      };
       filter.lfs = {
         smudge = "git-lfs smudge -- %f";
         process = "git-lfs filter-process";

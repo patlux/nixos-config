@@ -17,8 +17,9 @@
     home = "/Users/patwoz";
   };
 
+  system.primaryUser = "patwoz";
+
   programs.zsh.enable = true;
-  services.nix-daemon.enable = true;
 
   home-manager = {
     useUserPackages = true;

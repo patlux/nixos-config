@@ -1,0 +1,40 @@
+name: Check
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            allow-import-from-derivation = false
+
+      - name: Evaluate all configurations
+        run: |
+          set -euo pipefail
+
+          echo "::group::Evaluate darwinConfigurations.mbpromax"
+          nix eval .#darwinConfigurations.mbpromax.system --json > /dev/null
+          echo "::endgroup::"
+
+          echo "::group::Evaluate darwinConfigurations.mmm1"
+          nix eval .#darwinConfigurations.mmm1.system --json > /dev/null
+          echo "::endgroup::"
+
+          echo "::group::Evaluate nixosConfigurations.nixos"
+          nix eval .#nixosConfigurations.nixos.config.system.build.toplevel --json > /dev/null
+          echo "::endgroup::"
+
+          echo "::group::Evaluate homeConfigurations.orbubu"
+          nix eval .#homeConfigurations.orbubu.activationPackage --json > /dev/null
+          echo "::endgroup::"
+
+      - name: Check formatting
+        run: nix fmt -- --check .
+        continue-on-error: true

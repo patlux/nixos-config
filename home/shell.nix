@@ -41,6 +41,11 @@
       # Directory stack (replaces prezto directory module)
       setopt AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_SILENT
 
+      # Fix backspace/delete in vi mode for recalled history lines
+      bindkey -v '^?' backward-delete-char
+      bindkey -v '^H' backward-delete-char
+      bindkey -v '^W' backward-kill-word
+
       GPG_TTY="$(tty)"
       export GPG_TTY
 
@@ -99,15 +104,14 @@
     };
   };
 
-  home.sessionPath =
-    [
-      "${config.home.homeDirectory}/.local/bin"
-      "${config.home.homeDirectory}/.bin"
-      "${config.home.homeDirectory}/.bin/bin"
-      "${config.home.homeDirectory}/.bun/bin"
-    ]
-    ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
-      "/opt/homebrew/bin"
-      "/opt/homebrew/sbin"
-    ];
+  home.sessionPath = [
+    "${config.home.homeDirectory}/.local/bin"
+    "${config.home.homeDirectory}/.bin"
+    "${config.home.homeDirectory}/.bin/bin"
+    "${config.home.homeDirectory}/.bun/bin"
+  ]
+  ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
+    "/opt/homebrew/bin"
+    "/opt/homebrew/sbin"
+  ];
 }

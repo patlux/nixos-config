@@ -30,7 +30,7 @@ endif
 switch:
 ifeq ($(UNAME), Darwin)
 	nix build ".#darwinConfigurations.${NIXNAME}.system"
-	./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#${NIXNAME}"
+	sudo ./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#${NIXNAME}"
 else
 	sudo nixos-rebuild switch --flake ".#${NIXNAME}"
 endif

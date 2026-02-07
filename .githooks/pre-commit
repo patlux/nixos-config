@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Pre-commit hook: scan staged changes for secrets using gitleaks
+
+if ! command -v gitleaks &> /dev/null; then
+  echo "gitleaks not found — skipping secret scan"
+  echo "install with: nix profile install nixpkgs#gitleaks"
+  exit 0
+fi
+
+gitleaks git --pre-commit --staged --verbose
+
+status=$?
+if [ $status -ne 0 ]; then
+  echo ""
+  echo "!! Secret detected in staged changes !!"
+  echo ""
+  echo "If this is a false positive, commit with:"
+  echo "  git commit --no-verify"
+  echo ""
+  echo "Or add an allowlist entry to .gitleaks.toml"
+  exit 1
+fi

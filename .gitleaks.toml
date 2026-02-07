@@ -1,0 +1,30 @@
+# gitleaks configuration for nixos-config
+# https://github.com/gitleaks/gitleaks
+
+[extend]
+useDefault = true
+
+# Custom rules for this repository
+[[rules]]
+id = "healthchecks-ping-uuid"
+description = "Healthchecks.io ping UUID"
+regex = '''hc-ping\.com/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'''
+keywords = ["hc-ping"]
+
+[[rules]]
+id = "tailscale-auth-key"
+description = "Tailscale auth key"
+regex = '''tskey-auth-[A-Za-z0-9]+-[A-Za-z0-9]+'''
+keywords = ["tskey"]
+
+[[rules]]
+id = "age-private-key"
+description = "age private key"
+regex = '''AGE-SECRET-KEY-[A-Z0-9]+'''
+keywords = ["AGE-SECRET-KEY"]
+
+# Allow known non-secret values that are already in the repo
+[allowlist]
+paths = [
+  '''.gitleaks\.toml$''',
+]

@@ -2,6 +2,10 @@
 UNAME := $(shell uname)
 NIXNAME ?= mbpromax
 
+setup:
+	git config core.hooksPath .githooks
+	@echo "Git hooks installed"
+
 switch:
 ifeq ($(UNAME), Darwin)
 	nix build --extra-experimental-features nix-command --extra-experimental-features flakes ".#darwinConfigurations.${NIXNAME}.system"

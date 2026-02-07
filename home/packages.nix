@@ -86,6 +86,8 @@
     # not available on mac
     # iotop # io monitoring
     iftop # network monitoring
+
+    gitleaks # secret scanning
   ];
 
 }

@@ -11,6 +11,7 @@
     ShowStatusBar = true;
     QuitMenuItem = true;
     FXPreferredViewStyle = "Nlsv"; # List (https://daiderd.com/nix-darwin/manual/index.html#opt-system.defaults.finder.FXPreferredViewStyle)
+    FXDefaultSearchScope = "SCcf"; # Search current folder by default
     CreateDesktop = false;
   };
 

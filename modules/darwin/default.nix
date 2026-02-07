@@ -26,11 +26,44 @@
     AppleInterfaceStyleSwitchesAutomatically = true;
     AppleEnableSwipeNavigateWithScrolls = true;
     NSAutomaticWindowAnimationsEnabled = false;
-    NSAutomaticSpellingCorrectionEnabled = false;
     NSTableViewDefaultSizeMode = 1;
     NSWindowResizeTime = 0.001;
     AppleFontSmoothing = 2;
+
+    # Disable auto-correct annoyances for developers
+    NSAutomaticSpellingCorrectionEnabled = false;
+    NSAutomaticCapitalizationEnabled = false;
+    NSAutomaticDashSubstitutionEnabled = false;
+    NSAutomaticPeriodSubstitutionEnabled = false;
+    NSAutomaticQuoteSubstitutionEnabled = false;
+
+    # Expand save and print dialogs by default
+    NSNavPanelExpandedStateForSaveMode = true;
+    NSNavPanelExpandedStateForSaveMode2 = true;
+    PMPrintingExpandedStateForPrint = true;
+    PMPrintingExpandedStateForPrint2 = true;
+
+    # Save to disk, not iCloud, by default
+    NSDocumentSaveNewDocumentsToCloud = false;
+
+    # Force 24-hour time system-wide
+    AppleICUForce24HourTime = true;
+
+    # Click scrollbar to jump to clicked position
+    AppleScrollerPagingBehavior = true;
+
+    # Prefer tabs when opening documents
+    AppleWindowTabbingMode = "always";
   };
+
+  # Login window: require username + password (not user list)
+  system.defaults.loginwindow.SHOWFULLNAME = true;
+
+  # Independent spaces per display (better for multi-monitor + yabai)
+  system.defaults.spaces.spans-displays = false;
+
+  # Disable Stage Manager click-wallpaper-to-show-desktop
+  system.defaults.WindowManager.EnableStandardClickToShowDesktop = false;
 
   system.defaults.CustomUserPreferences = {
     NSGlobalDomain = {
@@ -42,11 +75,6 @@
       DSDontWriteNetworkStores = true;
       DSDontWriteUSBStores = true;
     };
-    # "com.apple.Safari" = {
-    #   Homepage = "about:blank";
-    #   UniversalSearchEnabled = false;
-    #   SuppressSearchSuggestions = true;
-    # };
     "com.apple.NetworkBrowser" = {
       BrowseAllInterfaces = 1;
     };
@@ -55,6 +83,23 @@
     };
     "com.apple.terminal" = {
       StringEncodings = 4;
+    };
+    # Privacy: disable personalized advertising
+    "com.apple.AdLib" = {
+      allowApplePersonalizedAdvertising = false;
+    };
+    # Stop "Use this disk for Time Machine?" prompts
+    "com.apple.TimeMachine" = {
+      DoNotOfferNewDisksForBackup = true;
+    };
+    # Stop Photos from opening when connecting devices
+    "com.apple.ImageCapture" = {
+      disableHotPlug = true;
+    };
+    # Screenshots: no window shadow, save as PNG
+    "com.apple.screencapture" = {
+      disable-shadow = true;
+      type = "png";
     };
   };
 

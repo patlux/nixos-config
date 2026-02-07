@@ -2,6 +2,11 @@
 
 {
   homebrew.enable = true;
+  homebrew.onActivation = {
+    cleanup = "zap"; # Remove formulae/casks not listed here
+    autoUpdate = true; # Run brew update before installing
+    upgrade = true; # Upgrade outdated formulae/casks on activation
+  };
   homebrew.taps = [
     "mattisg/mattisg" # adblock
     "xcodesorg/made" # xcodes

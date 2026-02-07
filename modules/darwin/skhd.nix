@@ -1,4 +1,4 @@
-{ ... }: 
+{ ... }:
 
 {
 
@@ -62,6 +62,4 @@ shift + alt - k : yabai -m window --resize top:0:-20
 lctrl + alt - k : yabai -m window --resize top:0:20
   ";
 
-
-
-  }
+}

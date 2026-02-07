@@ -1,5 +1,4 @@
-{ ... }: 
-
+{ ... }:
 
 {
   services.yabai.enable = true;
@@ -44,7 +43,7 @@
     yabai -m rule --add app="Petit Player" sticky=on manage=off
     yabai -m rule --add app="Bezel" sticky=on manage=off
     yabai -m rule --add title=".*raylib.*" manage=off sticky=on
-    
+
     yabai -m signal --add app='^Finder$' event=window_created action='yabai -m space --focus next; sleep 0.01; yabai -m space --focus prev'
     yabai -m signal --add app='^Finder$' event=window_destroyed action='yabai -m space --focus next; sleep 0.01; yabai -m space --focus prev'
     yabai -m signal --add app='^Ghostty$' event=window_created action='yabai -m space --layout bsp'

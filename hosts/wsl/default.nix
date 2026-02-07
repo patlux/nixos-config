@@ -1,10 +1,9 @@
 { pkgs, ... }:
 
 {
-  imports =
-    [
-      ../../modules/system.nix
-    ];
+  imports = [
+    ../../modules/system.nix
+  ];
 
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
@@ -13,7 +12,7 @@
     useUserPackages = true;
     useGlobalPkgs = true;
     users.root = {
-      imports = [./home.nix];
+      imports = [ ./home.nix ];
       home = {
         homeDirectory = "/root";
         stateVersion = "24.11";
@@ -26,4 +25,3 @@
 
   system.stateVersion = "24.11";
 }
-

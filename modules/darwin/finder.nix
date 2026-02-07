@@ -1,7 +1,7 @@
 { ... }:
 
 {
-    
+
   system.defaults.finder = {
     FXEnableExtensionChangeWarning = false;
     _FXShowPosixPathInTitle = true; # show full path in finder title
@@ -13,7 +13,6 @@
     FXPreferredViewStyle = "Nlsv"; # List (https://daiderd.com/nix-darwin/manual/index.html#opt-system.defaults.finder.FXPreferredViewStyle)
     CreateDesktop = false;
   };
-
 
   system.defaults.NSGlobalDomain = {
     AppleShowAllFiles = true;

@@ -5,7 +5,7 @@
     enableKeyMapping = true;
     remapCapsLockToEscape = true;
   };
-  
+
   system.keyboard.userKeyMapping = [
     # To easier enter "@"
     {

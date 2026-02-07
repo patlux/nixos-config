@@ -1,11 +1,10 @@
 { pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ../../modules/system.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../modules/system.nix
+  ];
 
   users.users.patwoz = {
     isNormalUser = true;
@@ -18,7 +17,7 @@
     useUserPackages = true;
     useGlobalPkgs = true;
     users.patwoz = {
-      imports = [./home.nix];
+      imports = [ ./home.nix ];
       home = {
         homeDirectory = "/home/patwoz";
         stateVersion = "24.11";
@@ -41,4 +40,3 @@
 
   system.stateVersion = "24.11";
 }
-

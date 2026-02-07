@@ -1,4 +1,4 @@
-{ ... }: 
+{ ... }:
 
 {
   homebrew.enable = true;
@@ -57,7 +57,7 @@
   # };
 
   system.activationScripts.activateSettings.text = ''
-        echo "Enable Adblock"
-        sudo /opt/homebrew/bin/adblock on
+    echo "Enable Adblock"
+    sudo /opt/homebrew/bin/adblock on
   '';
 }

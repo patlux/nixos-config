@@ -7,7 +7,9 @@
     userEmail = "email@patwoz.de";
 
     lfs.enable = true;
-    delta = { enable = true; };
+    delta = {
+      enable = true;
+    };
 
     signing.key = "0D4DE3BE5B9D660B";
     signing.signByDefault = true;
@@ -62,5 +64,3 @@
     ];
   };
 }
-
-

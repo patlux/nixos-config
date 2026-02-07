@@ -71,7 +71,7 @@
     ripgrep # recursively searches directories for a regex pattern
     jq # json parser
 
-    dnsutils  # `dig` + `nslookup`
+    dnsutils # `dig` + `nslookup`
 
     which
     tree
@@ -82,7 +82,7 @@
     zstd
     gnupg
 
-    btop  # replacement of htop/nmon
+    btop # replacement of htop/nmon
     # not available on mac
     # iotop # io monitoring
     iftop # network monitoring
@@ -91,4 +91,3 @@
   ];
 
 }
-

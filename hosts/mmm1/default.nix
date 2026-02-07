@@ -1,11 +1,10 @@
 { ... }:
 
 {
-  imports =
-    [
-      ../../modules/system.nix
-      ../../modules/darwin
-    ];
+  imports = [
+    ../../modules/system.nix
+    ../../modules/darwin
+  ];
 
   networking.hostName = "mmm1";
   networking.computerName = "mmm1";
@@ -25,7 +24,7 @@
     useUserPackages = true;
     useGlobalPkgs = true;
     users.patwoz = {
-      imports = [./home.nix];
+      imports = [ ./home.nix ];
       home = {
         homeDirectory = "/Users/patwoz";
         stateVersion = "24.11";
@@ -35,4 +34,3 @@
 
   system.stateVersion = 5;
 }
-

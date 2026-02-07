@@ -23,10 +23,12 @@
     };
 
     globalConfig.settings = {
-      idiomatic_version_file_enable_tools = ["node" "ruby"];
+      idiomatic_version_file_enable_tools = [
+        "node"
+        "ruby"
+      ];
     };
   };
 
   home.file.".default-npm-packages".source = ./files/.default-npm-packages;
 }
-

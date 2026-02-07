@@ -11,7 +11,12 @@
     config = {
       Label = "de.patwoz.crontab.backuphome";
       ProgramArguments = [ "/Users/patwoz/.bin/backup-home.sh" ];
-      StartCalendarInterval = [{ Hour = 10; Minute = 20; }];
+      StartCalendarInterval = [
+        {
+          Hour = 10;
+          Minute = 20;
+        }
+      ];
       RunAtLoad = true;
       StandardErrorPath = "/tmp/de.patwoz.crontab.backuphome.err";
       StandardOutPath = "/tmp/de.patwoz.crontab.backuphome.out";
@@ -23,7 +28,12 @@
     config = {
       Label = "de.patwoz.crontab.backupdev";
       ProgramArguments = [ "/Users/patwoz/.bin/backup-dev.sh" ];
-      StartCalendarInterval = [{ Hour = 10; Minute = 10; }];
+      StartCalendarInterval = [
+        {
+          Hour = 10;
+          Minute = 10;
+        }
+      ];
       RunAtLoad = true;
       StandardErrorPath = "/tmp/de.patwoz.crontab.backupdev.err";
       StandardOutPath = "/tmp/de.patwoz.crontab.backupdev.out";

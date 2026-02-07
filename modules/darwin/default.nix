@@ -1,4 +1,4 @@
-{ ... }: 
+{ ... }:
 
 {
   imports = [
@@ -44,7 +44,7 @@
     #   SuppressSearchSuggestions = true;
     # };
     "com.apple.NetworkBrowser" = {
-      BrowseAllInterfaces = 1; 
+      BrowseAllInterfaces = 1;
     };
     "com.apple.SoftwareUpdate" = {
       ScheduleFrequency = 1;

@@ -9,6 +9,11 @@
     lfs.enable = true;
     delta = {
       enable = true;
+      options = {
+        navigate = true;
+        line-numbers = true;
+        syntax-theme = "TwoDark";
+      };
     };
 
     signing.key = "0D4DE3BE5B9D660B";
@@ -18,8 +23,13 @@
       co = "checkout";
       ci = "commit";
       br = "branch";
+      st = "status -sb";
+      lg = "log --oneline --graph --decorate";
+      last = "log -1 HEAD";
+      unstage = "reset HEAD --";
+      amend = "commit --amend --no-edit";
       pushf = "push --force-with-lease";
-      cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d";
+      cleanup = "!git branch --merged | grep -v '\\*\\|master\\|main\\|develop' | xargs -n 1 git branch -d";
     };
 
     extraConfig = {
@@ -30,14 +40,12 @@
         editor = "nvim";
       };
       color.ui = true;
-      pull.rebase = false;
+      pull.rebase = true;
       push = {
         followTags = true;
         autoSetupRemote = true;
       };
       init.defaultBranch = "main";
-      "branch \"master\"".rebase = false;
-      "branch \"main\"".rebase = false;
     };
 
     ignores = [

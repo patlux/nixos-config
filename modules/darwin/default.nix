@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -13,6 +13,10 @@
     ./yabai.nix
 
     ./brew.nix
+  ];
+
+  fonts.packages = [
+    pkgs.nerd-fonts.meslo-lg
   ];
 
   security.pam.services.sudo_local.touchIdAuth = true;

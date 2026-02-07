@@ -14,8 +14,6 @@
   homebrew.casks = [
     "wezterm"
     "xcodes"
-    #  TODO: replace in home.nix as package
-    "font-meslo-lg-nerd-font"
     "betterdisplay"
     "raycast"
     "arc"

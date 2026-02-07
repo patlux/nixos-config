@@ -2,9 +2,21 @@
 UNAME := $(shell uname)
 NIXNAME ?= mbpromax
 
+.PHONY: setup fmt check update preview switch orbubu wsl
+
 setup:
 	git config core.hooksPath .githooks
 	@echo "Git hooks installed"
+
+fmt:
+	nix fmt
+
+check:
+	nix fmt -- --check .
+	nix flake check --no-build
+
+update:
+	nix flake update
 
 preview:
 ifeq ($(UNAME), Darwin)
@@ -17,10 +29,10 @@ endif
 
 switch:
 ifeq ($(UNAME), Darwin)
-	nix build --extra-experimental-features nix-command --extra-experimental-features flakes ".#darwinConfigurations.${NIXNAME}.system"
+	nix build ".#darwinConfigurations.${NIXNAME}.system"
 	./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#${NIXNAME}"
 else
-	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#${NIXNAME}"
+	sudo nixos-rebuild switch --flake ".#${NIXNAME}"
 endif
 
 orbubu:

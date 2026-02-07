@@ -1,4 +1,8 @@
-{ config, ... }:
+{
+  config,
+  pkgs,
+  ...
+}:
 
 {
   programs.zsh = {
@@ -9,20 +13,28 @@
 
     historySubstringSearch.enable = true;
     autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
 
     shellAliases = {
       mkdir = "mkdir -p -v";
-      ls = "eza";
-      ll = "eza -l";
       k = "kubectl";
+      lg = "lazygit";
       grep = "grep --color=auto";
+      ".." = "cd ..";
+      "..." = "cd ../..";
       android-talkback-enable = "adb shell settings put secure enabled_accessibility_services com.google.android.marvin.talkback/com.google.android.marvin.talkback.TalkBackService";
       android-talkback-disable = "adb shell settings put secure enabled_accessibility_services com.android.talkback/com.google.android.marvin.talkback.TalkBackService";
     };
 
     history = {
-      size = 10000;
+      size = 50000;
+      save = 50000;
       path = "${config.xdg.dataHome}/zsh/history";
+      ignoreDups = true;
+      ignoreAllDups = true;
+      ignoreSpace = true;
+      extended = true;
+      share = true;
     };
 
     initContent = ''
@@ -87,13 +99,15 @@
     };
   };
 
-  home.sessionPath = [
-    "${config.home.homeDirectory}/.local/bin"
-    "${config.home.homeDirectory}/.bin"
-    "${config.home.homeDirectory}/.bin/bin"
-    "${config.home.homeDirectory}/.bun/bin"
-    # TODO: only for mac
-    "/opt/homebrew/bin"
-    "/opt/homebrew/sbin"
-  ];
+  home.sessionPath =
+    [
+      "${config.home.homeDirectory}/.local/bin"
+      "${config.home.homeDirectory}/.bin"
+      "${config.home.homeDirectory}/.bin/bin"
+      "${config.home.homeDirectory}/.bun/bin"
+    ]
+    ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
+      "/opt/homebrew/bin"
+      "/opt/homebrew/sbin"
+    ];
 }

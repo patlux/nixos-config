@@ -30,16 +30,38 @@
       ...
     }:
     let
+      systems = [
+        "aarch64-darwin"
+        "aarch64-linux"
+        "x86_64-linux"
+      ];
+
       mkApp = pkgs: name: script: {
         type = "app";
         program = "${pkgs.writeShellScriptBin name script}/bin/${name}";
       };
+
+      mkDarwinHost = name: {
+        ${name} = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [
+            home-manager.darwinModules.home-manager
+            ./hosts/${name}
+          ];
+        };
+      };
     in
     {
 
-      formatter = nixpkgs.lib.genAttrs [ "aarch64-darwin" "aarch64-linux" "x86_64-linux" ] (
+      formatter = nixpkgs.lib.genAttrs systems (
         system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style
       );
+
+      checks = nixpkgs.lib.genAttrs systems (system: {
+        formatting = nixpkgs.legacyPackages.${system}.runCommand "check-formatting" { } ''
+          ${nixpkgs.legacyPackages.${system}.nixfmt-rfc-style}/bin/nixfmt --check ${./.} && touch $out
+        '';
+      });
 
       # Apps
 
@@ -121,21 +143,7 @@
 
       # macOS
 
-      darwinConfigurations.mbpromax = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          home-manager.darwinModules.home-manager
-          ./hosts/mbpromax
-        ];
-      };
-
-      darwinConfigurations.mmm1 = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          home-manager.darwinModules.home-manager
-          ./hosts/mmm1
-        ];
-      };
+      darwinConfigurations = (mkDarwinHost "mbpromax") // (mkDarwinHost "mmm1");
 
     };
 }

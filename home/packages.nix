@@ -2,9 +2,50 @@
 
 {
 
-  programs.fzf.enable = true;
-  programs.fzf.enableZshIntegration = true;
-  programs.fzf.defaultCommand = "fd --type file --hidden --exclude .git";
+  # --- Program modules (provide the binary + config integration) ---
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+    defaultCommand = "fd --type file --hidden --exclude .git";
+    fileWidgetCommand = "fd --type file --hidden --exclude .git";
+    changeDirWidgetCommand = "fd --type directory --hidden --exclude .git";
+    defaultOptions = [
+      "--height 40%"
+      "--layout=reverse"
+      "--border"
+    ];
+  };
+
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "TwoDark";
+      style = "numbers,changes,header";
+    };
+  };
+
+  programs.ripgrep = {
+    enable = true;
+    arguments = [
+      "--smart-case"
+      "--hidden"
+      "--glob=!.git"
+    ];
+  };
+
+  programs.eza = {
+    enable = true;
+    git = true;
+    icons = "auto";
+  };
+
+  programs.btop = {
+    enable = true;
+    settings = {
+      vim_keys = true;
+    };
+  };
 
   programs.zsh.initContent = ''
     # Add mysql client to PATH if installed via brew
@@ -16,7 +57,6 @@
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     gcc
-    git
     vim
     file
     wget
@@ -43,9 +83,7 @@
     k9s
     tilt
 
-    eza # ls alternative
     pinentry-curses
-    delta # better diff
     fd # better "find"
     ncdu
     watchman
@@ -57,7 +95,6 @@
     lazygit
     picocom
     uv
-    bat
     libavif # avif image format
     k6
 
@@ -68,7 +105,6 @@
     gopls
     cargo
 
-    ripgrep # recursively searches directories for a regex pattern
     jq # json parser
 
     dnsutils # `dig` + `nslookup`
@@ -82,7 +118,6 @@
     zstd
     gnupg
 
-    btop # replacement of htop/nmon
     # not available on mac
     # iotop # io monitoring
     iftop # network monitoring

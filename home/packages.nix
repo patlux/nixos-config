@@ -3,6 +3,7 @@
 {
 
   programs.fzf.enable = true;
+  programs.fzf.enableZshIntegration = true;
   programs.fzf.defaultCommand = "fd --type file --hidden --exclude .git";
 
   # only if mysql is installed by brew

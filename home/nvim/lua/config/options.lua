@@ -12,8 +12,6 @@ vim.filetype.add({
 
 vim.opt.complete = ""
 vim.opt.title = true
--- vim.opt.titlestring = "%f - nvim"
--- vim.opt.titlestring = "%{expand('%:p') != '' ? expand('%:p') : '[No File]'} - nvim"
 vim.opt.titlestring = "%{expand('%:p') != '' ? expand('%:p') : getcwd()} - nvim"
 
 -- https://github.com/oven-sh/bun/issues/8520#issuecomment-2585256608

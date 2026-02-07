@@ -6,7 +6,6 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "make",
   callback = function()
     vim.schedule(function()
-      print("Makefile autocmd triggered")
       vim.bo.expandtab = false
       vim.bo.tabstop = 4
       vim.bo.shiftwidth = 4

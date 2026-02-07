@@ -17,12 +17,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay/e908e40b31632fc2bcda917dadee8c3ab8b46167"; # master
-    };
   };
 
   outputs = { nixpkgs, nix-darwin, nixos-wsl, home-manager, ... }: {
+
+    formatter = nixpkgs.lib.genAttrs [ "aarch64-darwin" "aarch64-linux" "x86_64-linux" ] (system:
+      nixpkgs.legacyPackages.${system}.nixfmt-rfc-style
+    );
 
     # NixOS
 

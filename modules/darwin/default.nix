@@ -56,6 +56,7 @@
 
   networking.applicationFirewall.enable = true;
   networking.applicationFirewall.blockAllIncoming = true;
+  networking.applicationFirewall.enableStealthMode = true;
 
   system.activationScripts.activateSettings.text = ''
     printf "disabling spotlight indexing... "

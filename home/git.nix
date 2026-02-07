@@ -3,42 +3,31 @@
 {
   programs.git = {
     enable = true;
-    userName = "Patrick Wozniak";
-    userEmail = "email@patwoz.de";
 
     lfs.enable = true;
-    delta = {
-      enable = true;
-      options = {
-        navigate = true;
-        line-numbers = true;
-        syntax-theme = "TwoDark";
-      };
-    };
 
     signing.key = "0D4DE3BE5B9D660B";
     signing.signByDefault = true;
 
-    aliases = {
-      co = "checkout";
-      ci = "commit";
-      br = "branch";
-      st = "status -sb";
-      lg = "log --oneline --graph --decorate";
-      last = "log -1 HEAD";
-      unstage = "reset HEAD --";
-      amend = "commit --amend --no-edit";
-      pushf = "push --force-with-lease";
-      cleanup = "!git branch --merged | grep -v '\\*\\|master\\|main\\|develop' | xargs -n 1 git branch -d";
-    };
-
-    extraConfig = {
-      github = {
-        username = "patlux";
+    settings = {
+      user = {
+        name = "Patrick Wozniak";
+        email = "email@patwoz.de";
       };
-      core = {
-        editor = "nvim";
+      alias = {
+        co = "checkout";
+        ci = "commit";
+        br = "branch";
+        st = "status -sb";
+        lg = "log --oneline --graph --decorate";
+        last = "log -1 HEAD";
+        unstage = "reset HEAD --";
+        amend = "commit --amend --no-edit";
+        pushf = "push --force-with-lease";
+        cleanup = "!git branch --merged | grep -v '\\*\\|master\\|main\\|develop' | xargs -n 1 git branch -d";
       };
+      github.username = "patlux";
+      core.editor = "nvim";
       color.ui = true;
       pull.rebase = true;
       push = {
@@ -70,5 +59,16 @@
         contents.commit.gpgSign = true;
       }
     ];
+  };
+
+  # Delta (git pager / diff viewer) - separated from git in newer home-manager
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      navigate = true;
+      line-numbers = true;
+      syntax-theme = "TwoDark";
+    };
   };
 }

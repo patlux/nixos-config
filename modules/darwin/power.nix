@@ -12,5 +12,9 @@
 
     # Disable Wake on LAN on AC power (prevents network-triggered wakes)
     sudo pmset -c womp 0
+
+    # Low Power Mode: throttle CPU on battery, full speed on AC
+    sudo pmset -b lowpowermode 1
+    sudo pmset -c lowpowermode 0
   '';
 }

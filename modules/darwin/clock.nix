@@ -6,7 +6,7 @@
     Show24Hour = true;
     ShowDate = 0;
     ShowDayOfMonth = true;
-    ShowSeconds = true;
+    ShowSeconds = false; # Avoid per-second menu bar redraws (saves energy)
   };
 
 }

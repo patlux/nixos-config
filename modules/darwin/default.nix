@@ -13,6 +13,7 @@
     ./yabai.nix
 
     ./brew.nix
+    ./power.nix
   ];
 
   fonts.packages = [
@@ -28,7 +29,7 @@
     NSAutomaticWindowAnimationsEnabled = false;
     NSTableViewDefaultSizeMode = 1;
     NSWindowResizeTime = 0.001;
-    AppleFontSmoothing = 2;
+    AppleFontSmoothing = 0; # Disable subpixel smoothing (unnecessary on Retina)
 
     # Disable auto-correct annoyances for developers
     NSAutomaticSpellingCorrectionEnabled = false;

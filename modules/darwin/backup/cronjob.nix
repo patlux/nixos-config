@@ -17,7 +17,7 @@
           Minute = 20;
         }
       ];
-      RunAtLoad = true;
+      RunAtLoad = false; # Only run at scheduled time, not on login
       StandardErrorPath = "/tmp/de.patwoz.crontab.backuphome.err";
       StandardOutPath = "/tmp/de.patwoz.crontab.backuphome.out";
     };
@@ -34,7 +34,7 @@
           Minute = 10;
         }
       ];
-      RunAtLoad = true;
+      RunAtLoad = false; # Only run at scheduled time, not on login
       StandardErrorPath = "/tmp/de.patwoz.crontab.backupdev.err";
       StandardOutPath = "/tmp/de.patwoz.crontab.backupdev.out";
     };

@@ -45,13 +45,19 @@
     "minisim"
     "rustdesk"
     "proxyman"
+    "zen"
+    "tableplus"
+    "microsoft-teams"
+    "lm-studio"
+    "keyboardcleantool"
+    "google-chrome"
   ];
   # homebrew.masApps = {
   #   "AdGuard for Safari" = 1440147259;
   #   "Amphetamine" = 937984704;
   #   "Apple Configurator" = 1037126344;
   #   "Bitwarden" = 1352778147;
-  #   "Microsoft Remote Desktop" = 1295203466;
+  #   "Microsoft Remote Desktop" = 1295203266;
   #   "Quick Camera" = 598853070;
   #   "Steam Link" = 1246969117;
   #   "Tailscale" = 1475387142;

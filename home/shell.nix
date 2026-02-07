@@ -42,9 +42,23 @@
       setopt AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_SILENT
 
       # Fix backspace/delete in vi mode for recalled history lines
-      bindkey -v '^?' backward-delete-char
-      bindkey -v '^H' backward-delete-char
-      bindkey -v '^W' backward-kill-word
+      # BACKSPACE_PAST_START lets backspace delete past insert-mode entry point
+      zle -A .backward-delete-char vi-backward-delete-char
+      bindkey -M viins '^?' backward-delete-char
+      bindkey -M viins '^H' backward-delete-char
+      bindkey -M viins '^W' backward-kill-word
+      bindkey -M viins '^U' backward-kill-line
+
+      # Tab: accept autosuggestion if visible, otherwise do normal completion
+      autosuggest-accept-or-complete() {
+        if [[ -n "$POSTDISPLAY" ]]; then
+          zle autosuggest-accept
+        else
+          zle expand-or-complete
+        fi
+      }
+      zle -N autosuggest-accept-or-complete
+      bindkey -M viins '^I' autosuggest-accept-or-complete
 
       # Bind arrow keys to history-substring-search (vi mode overrides defaults)
       bindkey '^[[A' history-substring-search-up

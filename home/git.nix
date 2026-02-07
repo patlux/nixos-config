@@ -68,7 +68,7 @@
     options = {
       navigate = true;
       line-numbers = true;
-      syntax-theme = "TwoDark";
+      syntax-theme = "Monokai Extended"; # closest built-in match to Sonokai
     };
   };
 }

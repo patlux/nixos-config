@@ -8,14 +8,14 @@
     mouse_follows_focus = "off";
     focus_follows_mouse = "off";
     window_placement = "second_child";
-    window_shadow = true;
-    window_opacity = false;
+    window_shadow = "on";
+    window_opacity = "off";
     window_opacity_duration = 0.0;
     active_window_opacity = 1.0;
     normal_window_opacity = 0.90;
     insert_feedback_color = "0xffd75f5f";
     split_ratio = 0.50;
-    auto_balance = false;
+    auto_balance = "off";
     mouse_modifier = "fn";
     mouse_action1 = "move";
     mouse_action2 = "resize";

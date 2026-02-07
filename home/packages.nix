@@ -14,13 +14,18 @@
       "--height 40%"
       "--layout=reverse"
       "--border"
+      # Sonokai palette
+      "--color=fg:#e2e2e3,bg:#2c2e34,hl:#f39660"
+      "--color=fg+:#e2e2e3,bg+:#363944,hl+:#f39660"
+      "--color=info:#e7c664,prompt:#76cce0,pointer:#fc5d7c"
+      "--color=marker:#9ed072,spinner:#b39df3,header:#7f8490"
     ];
   };
 
   programs.bat = {
     enable = true;
     config = {
-      theme = "TwoDark";
+      theme = "Monokai Extended"; # closest built-in match to Sonokai
       style = "numbers,changes,header";
     };
   };
@@ -56,7 +61,8 @@
   '';
 
   # Packages that should be installed to the user profile.
-  home.packages = with pkgs; [
+  home.packages =
+    (with pkgs; [
     gcc
     vim
     file
@@ -119,12 +125,16 @@
     gawk
     zstd
     gnupg
+    pass
 
     # not available on mac
     # iotop # io monitoring
     iftop # network monitoring
 
     gitleaks # secret scanning
-  ];
+  ])
+    ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
+      pkgs.libsecret
+    ];
 
 }

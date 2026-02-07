@@ -46,6 +46,12 @@
       bindkey -v '^H' backward-delete-char
       bindkey -v '^W' backward-kill-word
 
+      # Bind arrow keys to history-substring-search (vi mode overrides defaults)
+      bindkey '^[[A' history-substring-search-up
+      bindkey '^[[B' history-substring-search-down
+      bindkey -M vicmd 'k' history-substring-search-up
+      bindkey -M vicmd 'j' history-substring-search-down
+
       GPG_TTY="$(tty)"
       export GPG_TTY
 

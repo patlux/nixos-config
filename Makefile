@@ -2,7 +2,7 @@
 UNAME := $(shell uname)
 NIXNAME ?= mbpromax
 
-.PHONY: setup fmt check update preview switch orbubu wsl
+.PHONY: setup fmt lint check update preview switch orbubu wsl
 
 setup:
 	git config core.hooksPath .githooks
@@ -10,6 +10,9 @@ setup:
 
 fmt:
 	nix fmt
+
+lint:
+	nix run nixpkgs#statix -- check .
 
 check:
 	nix fmt -- --check .

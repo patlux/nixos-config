@@ -46,6 +46,7 @@
       vim_keys = true;
     };
   };
+  xdg.configFile."btop/btop.conf".force = true;
 
   programs.zsh.initContent = ''
     # Add mysql client to PATH if installed via brew
@@ -65,6 +66,7 @@
     # archives
     zip
     xz
+    neovim
     unzip # for neovim
     p7zip
     mkcert

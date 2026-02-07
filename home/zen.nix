@@ -1,9 +1,20 @@
-{ ... }:
+{ pkgs, ... }:
 
 let
   zenProfile = "tvhmrfo5.Default (release)";
+
+  bitwardenXpi = pkgs.fetchurl {
+    url = "https://addons.mozilla.org/firefox/downloads/file/4664623/bitwarden_password_manager-2025.12.1.xpi";
+    hash = "sha256-p6Ej7uTkD92K98DGckNzHdzDeuFJjPKCiZX0kFYAxR8=";
+  };
 in
 {
+  # Bitwarden extension — deployed to Zen profile extensions directory
+  home.file."Library/Application Support/zen/Profiles/${zenProfile}/extensions/{446900e4-71c2-419f-a6a7-df9c091e268b}.xpi" =
+    {
+      source = bitwardenXpi;
+      force = true;
+    };
   # Zen Browser user.js — persistent preferences applied on every launch
   # Manages: privacy, security, telemetry, DNS, devtools, workspaces
   home.file."Library/Application Support/zen/Profiles/${zenProfile}/user.js" = {

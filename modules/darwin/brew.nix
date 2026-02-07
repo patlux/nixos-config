@@ -15,10 +15,12 @@
     "pkg-config"
     "ios-deploy"
     "adblock"
+    "bash" # dependency of adblock — listed explicitly to prevent cleanup errors
+    "hurl"
   ];
   homebrew.casks = [
     "wezterm"
-    "xcodes"
+    "xcodes-app"
     "betterdisplay"
     "raycast"
     "arc"

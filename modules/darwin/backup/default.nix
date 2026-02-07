@@ -35,6 +35,23 @@
     +Library/Application Support/Insomnium/Cookies
     +Library/Application Support/Insomnium/plugins
     +Library/Application Support/Insomnium/plugins/*
+    +Library/Application Support/zen/
+    +Library/Application Support/zen/profiles.ini
+    +Library/Application Support/zen/installs.ini
+    +Library/Application Support/zen/Profiles/
+    +Library/Application Support/zen/Profiles/*/
+    +Library/Application Support/zen/Profiles/*/*.sqlite
+    +Library/Application Support/zen/Profiles/*/*.json
+    +Library/Application Support/zen/Profiles/*/*.jsonlz4
+    +Library/Application Support/zen/Profiles/*/*.js
+    +Library/Application Support/zen/Profiles/*/*.db
+    +Library/Application Support/zen/Profiles/*/key4.db
+    +Library/Application Support/zen/Profiles/*/logins.json
+    +Library/Application Support/zen/Profiles/*/cert9.db
+    +Library/Application Support/zen/Profiles/*/extensions/
+    +Library/Application Support/zen/Profiles/*/extensions/*
+    +Library/Application Support/zen/Profiles/*/bookmarkbackups/
+    +Library/Application Support/zen/Profiles/*/bookmarkbackups/*
     +Library/Preferences/
     +Library/Preferences/com.viscosityvpn.Viscosity.plist
     -*

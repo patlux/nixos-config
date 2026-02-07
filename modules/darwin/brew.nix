@@ -3,7 +3,7 @@
 {
   homebrew.enable = true;
   homebrew.onActivation = {
-    cleanup = "zap"; # Remove formulae/casks not listed here
+    cleanup = "uninstall"; # Remove unlisted formulae/casks but preserve app data
     autoUpdate = true; # Run brew update before installing
     upgrade = true; # Upgrade outdated formulae/casks on activation
   };

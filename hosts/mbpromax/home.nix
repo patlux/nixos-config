@@ -12,6 +12,7 @@
     ../../home/ruby.nix
     ../../home/shell.nix
     ../../home/wezterm.nix
+    ../../home/zen.nix
     ../../modules/darwin/backup
     ../../modules/darwin/backup/cronjob.nix
   ];

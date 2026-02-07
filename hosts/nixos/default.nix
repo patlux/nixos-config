@@ -26,6 +26,13 @@
     };
   };
 
+  services.openssh.settings = {
+    PasswordAuthentication = false;
+    KbdInteractiveAuthentication = false;
+    PermitRootLogin = "no";
+    X11Forwarding = false;
+  };
+
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 

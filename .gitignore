@@ -1,0 +1,19 @@
+# Nix build artifacts
+result
+result-*
+
+# Secrets
+secrets.nix
+*.secret
+*.key
+*.pem
+*.p12
+.env
+.env.*
+
+# Editor/tool state
+.direnv/
+.opencode/
+
+# macOS
+.DS_Store

@@ -17,6 +17,9 @@
     "adblock"
     "bash" # dependency of adblock — listed explicitly to prevent cleanup errors
     "hurl"
+    "libyaml" # ruby-build dependency (psych extension)
+    "gmp" # ruby-build dependency (bignum/openssl)
+    "defaultbrowser"
   ];
   homebrew.casks = [
     "wezterm"

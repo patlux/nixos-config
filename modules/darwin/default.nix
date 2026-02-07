@@ -59,7 +59,7 @@
   };
 
   networking.applicationFirewall.enable = true;
-  networking.applicationFirewall.blockAllIncoming = true;
+  networking.applicationFirewall.blockAllIncoming = false;
   networking.applicationFirewall.enableStealthMode = true;
 
   system.activationScripts.activateSettings.text = ''

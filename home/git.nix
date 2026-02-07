@@ -27,26 +27,8 @@
       core = {
         editor = "nvim";
       };
-      color = {
-        ui = true;
-        "diff-highlight".oldNormal = "red bold";
-        "diff-highlight".oldHighlight = "red bold 52";
-        "diff-highlight".newNormal = "green bold";
-        "diff-highlight".newHighlight = "green bold 22";
-        "diff".meta = "yellow";
-        "diff".frag = "magenta bold";
-        "diff".commit = "yellow bold";
-        "diff".old = "red bold";
-        "diff".new = "green bold";
-        "diff".whitespace = "red reverse";
-      };
+      color.ui = true;
       pull.rebase = false;
-      filter.lfs = {
-        smudge = "git-lfs smudge -- %f";
-        process = "git-lfs filter-process";
-        required = true;
-        clean = "git-lfs clean -- %f";
-      };
       push = {
         followTags = true;
         autoSetupRemote = true;

@@ -6,18 +6,20 @@
   programs.fzf.enableZshIntegration = true;
   programs.fzf.defaultCommand = "fd --type file --hidden --exclude .git";
 
-  # only if mysql is installed by brew
-  programs.zsh.initContent = "
-      export PATH=$PATH:/opt/homebrew/opt/mysql-client/bin
-  ";
+  programs.zsh.initContent = ''
+    # Add mysql client to PATH if installed via brew
+    if [ -d /opt/homebrew/opt/mysql-client/bin ]; then
+      export PATH="$PATH:/opt/homebrew/opt/mysql-client/bin"
+    fi
+  '';
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     gcc
     git
     vim
-    wget
     file
+    wget
     autossh
 
     # archives
@@ -41,9 +43,6 @@
     k9s
     tilt
 
-    # old version
-    # hurl # api tests
-
     eza # ls alternative
     pinentry-curses
     delta # better diff
@@ -55,7 +54,6 @@
     rsync
     cmake
     hyperfine
-    wget
     lazygit
     picocom
     uv
@@ -75,7 +73,6 @@
 
     dnsutils  # `dig` + `nslookup`
 
-    file
     which
     tree
     gnused

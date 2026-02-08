@@ -56,6 +56,7 @@
     "lm-studio"
     "keyboardcleantool"
     "google-chrome"
+    "session-manager-plugin"
   ];
   # homebrew.masApps = {
   #   "AdGuard for Safari" = 1440147259;

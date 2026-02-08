@@ -90,6 +90,7 @@
       kubectx
       k9s
       tilt
+      google-cloud-sdk
 
       pinentry-curses
       fd # better "find"

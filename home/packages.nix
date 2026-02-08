@@ -131,10 +131,12 @@
     # iotop # io monitoring
     iftop # network monitoring
 
-    gitleaks # secret scanning
-  ])
-    ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
-      pkgs.libsecret
-    ];
+     gitleaks # secret scanning
+     gh
+     glab
+   ])
+     ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
+       pkgs.libsecret
+     ];
 
 }

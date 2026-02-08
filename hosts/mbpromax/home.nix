@@ -32,4 +32,12 @@
     apktool
   ];
 
+  home.file.".local/bin/tailscale" = {
+    executable = true;
+    text = ''
+      #!/usr/bin/env bash
+      exec -a Tailscale /Applications/Tailscale.app/Contents/MacOS/Tailscale "$@"
+    '';
+  };
+
 }

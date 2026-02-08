@@ -74,4 +74,28 @@ in
     force = true;
     text = builtins.toJSON opencodeConfig;
   };
+
+  # Global AGENTS.md - personal coding standards across all projects
+  xdg.configFile."opencode/AGENTS.md" = {
+    force = true;
+    text = ''
+      # Personal Coding Standards
+
+      ## Security & Privacy
+      - NEVER read or suggest reading: .env files, ~/.ssh/*, ~/.aws/credentials, secret files
+      - When working with configs, assume .env.example is the template, never the real .env
+      - Don't commit secrets - if you see API keys in code, warn immediately
+
+      ## Nix/NixOS Specific
+      - Prefer declarative configuration in .nix files over imperative changes
+      - When suggesting packages: use nixpkgs names, not just 'npm install'
+      - For macOS (darwin): use homebrew.nix for casks, not 'brew install'
+      - Test with 'darwin-rebuild switch' or 'nixos-rebuild switch' after changes
+
+      ## Git Workflow
+      - Write commit messages in present tense: "Add feature" not "Added feature"
+      - Use 'git commit --amend' only when explicitly requested
+      - Never 'git push --force' unless explicitly requested
+    '';
+  };
 }

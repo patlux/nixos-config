@@ -63,80 +63,80 @@
   # Packages that should be installed to the user profile.
   home.packages =
     (with pkgs; [
-    gcc
-    vim
-    file
-    wget
-    autossh
+      gcc
+      vim
+      file
+      wget
+      autossh
 
-    # archives
-    zip
-    xz
-    neovim
-    unzip # for neovim
-    p7zip
-    mkcert
+      # archives
+      zip
+      xz
+      neovim
+      unzip # for neovim
+      p7zip
+      mkcert
 
-    postgresql
+      postgresql
 
-    # kubernetes / cloud
-    awscli2
-    terraform
-    skaffold
-    redis
-    eksctl
-    k3d
-    kubectl
-    kubectx
-    k9s
-    tilt
+      # kubernetes / cloud
+      awscli2
+      terraform
+      skaffold
+      redis
+      eksctl
+      k3d
+      kubectl
+      kubectx
+      k9s
+      tilt
 
-    pinentry-curses
-    fd # better "find"
-    ncdu
-    watchman
-    imagemagick
-    ffmpeg
-    rsync
-    cmake
-    hyperfine
-    lazygit
-    picocom
-    uv
-    libavif # avif image format
-    k6
+      pinentry-curses
+      fd # better "find"
+      ncdu
+      watchman
+      imagemagick
+      ffmpeg
+      rsync
+      cmake
+      hyperfine
+      lazygit
+      picocom
+      uv
+      libavif # avif image format
+      k6
 
-    # for neovim
-    tree-sitter
-    go
-    gofumpt
-    gopls
-    cargo
+      # for neovim
+      tree-sitter
+      go
+      gofumpt
+      gopls
+      cargo
 
-    jq # json parser
+      jq # json parser
 
-    dnsutils # `dig` + `nslookup`
+      dnsutils # `dig` + `nslookup`
 
-    which
-    tree
-    gnused
-    gnutar
-    gnumake
-    gawk
-    zstd
-    gnupg
-    pass
+      which
+      tree
+      gnused
+      gnutar
+      gnumake
+      gawk
+      zstd
+      gnupg
+      pass
 
-    # not available on mac
-    # iotop # io monitoring
-    iftop # network monitoring
+      # not available on mac
+      # iotop # io monitoring
+      iftop # network monitoring
 
-     gitleaks # secret scanning
-     gh
-     glab
-   ])
-     ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
-       pkgs.libsecret
-     ];
+      gitleaks # secret scanning
+      gh
+      glab
+    ])
+    ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
+      pkgs.libsecret
+    ];
 
 }

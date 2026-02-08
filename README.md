@@ -17,17 +17,29 @@ cd nixos-config
 
 # On macOS install brew first: https://brew.sh/
 
+# Setup git hooks
+make setup
+
 # on Macbook Pro
-make
+make switch
 # Additional steps in ./SETUP_MACOS.md
 
 # on NixOS
-NIXNAME=nixos make
+NIXNAME=nixos make switch
 ```
 
 ## Maintenance
 
-TODO
+Run `make` to see all available commands.
+
+Common workflows:
+
+```sh
+make audit    # Scan repo for leaked secrets (gitleaks)
+make update   # Update flake inputs
+make preview  # Preview changes before applying
+make switch   # Build and apply system configuration
+```
 
 ## Tools
 

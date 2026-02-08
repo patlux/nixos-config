@@ -53,15 +53,7 @@
     in
     {
 
-      formatter = nixpkgs.lib.genAttrs systems (
-        system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style
-      );
-
-      checks = nixpkgs.lib.genAttrs systems (system: {
-        formatting = nixpkgs.legacyPackages.${system}.runCommand "check-formatting" { } ''
-          ${nixpkgs.legacyPackages.${system}.nixfmt-rfc-style}/bin/nixfmt --check ${./.} && touch $out
-        '';
-      });
+      formatter = nixpkgs.lib.genAttrs systems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
 
       # Apps
 

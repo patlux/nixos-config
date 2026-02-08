@@ -9,10 +9,12 @@ let
         "*" = "ask";
         "~/dev/*" = "allow";
         "/tmp/*" = "allow";
+        "/private/tmp/*" = "allow";
       };
 
       read = {
         "*" = "allow";
+        "/private/tmp/*" = "allow";
 
         # Explicit .env policy (OpenCode also denies these by default)
         "*.env" = "deny";

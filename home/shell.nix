@@ -212,8 +212,8 @@
     settings = {
       add_newline = false;
 
-      format = "$directory$git_branch$git_status$character";
-      right_format = "$cmd_duration$all";
+      format = "$directory$character";
+      right_format = "$git_branch$cmd_duration";
 
       # Sonokai palette colors
       character = {
@@ -233,26 +233,11 @@
         style = "bold #b39df3";
       };
 
-      git_status = {
-        format = "[$all_status$ahead_behind]($style) ";
-        style = "bold #fc5d7c";
-      };
-
       cmd_duration = {
         min_time = 2000;
         format = "[$duration]($style) ";
         style = "bold #e7c664";
       };
-
-      # Show language versions only when relevant files are present (starship default)
-      # Keep these minimal in the right prompt
-      nodejs.format = "[$symbol$version]($style) ";
-      rust.format = "[$symbol$version]($style) ";
-      golang.format = "[$symbol$version]($style) ";
-      python.format = "[$symbol$version]($style) ";
-      java.format = "[$symbol$version]($style) ";
-      zig.format = "[$symbol$version]($style) ";
-      kubernetes.disabled = false;
     };
   };
 

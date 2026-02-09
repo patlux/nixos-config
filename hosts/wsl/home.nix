@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../home/direnv.nix
     ../../home/git.nix
     ../../home/gnupg.nix
     # ../../home/mise.nix

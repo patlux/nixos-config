@@ -3,6 +3,7 @@
 {
   imports = [
     ../../home/core.nix
+    ../../home/direnv.nix
     ../../home/git.nix
     ../../home/gnupg.nix
     ../../home/mise.nix

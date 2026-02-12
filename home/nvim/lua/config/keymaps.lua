@@ -5,8 +5,8 @@
 local map = LazyVim.safe_keymap_set
 
 map("n", "<leader>xj", function()
-  vim.diagnostic.jump({ count = 1 })
+  vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Next Diagnostic" })
 map("n", "<leader>xk", function()
-  vim.diagnostic.jump({ count = -1 })
+  vim.diagnostic.jump({ count = -1, float = true })
 end, { desc = "Prev Diagnostic" })

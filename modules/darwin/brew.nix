@@ -14,6 +14,7 @@
   homebrew.brews = [
     "pkg-config"
     "ios-deploy"
+    "xcodegen"
     "adblock"
     "bash" # dependency of adblock — listed explicitly to prevent cleanup errors
     "hurl"

@@ -135,6 +135,7 @@
       gitleaks # secret scanning
       gh
       glab
+      jira-cli-go
     ])
     ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
       pkgs.libsecret

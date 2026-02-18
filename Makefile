@@ -28,7 +28,7 @@ lint:
 	nix run nixpkgs#statix -- check .
 
 check:
-	nix fmt -- --check .
+	nix fmt -- --ci
 	nix flake check --no-build
 
 audit:

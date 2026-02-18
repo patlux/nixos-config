@@ -14,18 +14,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-wsl = {
-      url = "github:nix-community/nixos-wsl";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
   };
 
   outputs =
     {
       nixpkgs,
       nix-darwin,
-      nixos-wsl,
       home-manager,
       ...
     }:
@@ -104,32 +98,6 @@
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
         modules = [
           ./hosts/orbubu/home.nix
-        ];
-      };
-
-      # WSL
-
-      nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          nixos-wsl.nixosModules.default
-          {
-            wsl = {
-              enable = true;
-
-              wslConf = {
-                automount.root = "/mnt";
-                network.generateResolvConf = false;
-              };
-
-              defaultUser = "patwoz";
-              startMenuLaunchers = true;
-            };
-
-            system.stateVersion = "24.11";
-          }
-          home-manager.nixosModules.home-manager
-          # ./hosts/wsl
         ];
       };
 

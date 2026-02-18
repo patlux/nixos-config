@@ -2,7 +2,7 @@
 UNAME := $(shell uname)
 NIXNAME ?= mbpromax
 
-.PHONY: help setup fmt lint check audit update preview switch orbubu wsl
+.PHONY: help setup fmt lint check audit update preview switch orbubu
 
 help:
 	@echo "Available commands:"
@@ -16,7 +16,6 @@ help:
 	@echo "  preview - Preview system changes without applying"
 	@echo "  switch  - Build and switch to new system configuration"
 	@echo "  orbubu  - Build and switch to orbubu home configuration"
-	@echo "  wsl     - Build WSL configuration"
 
 setup:
 	git config core.hooksPath .githooks
@@ -61,6 +60,3 @@ endif
 
 orbubu:
 	nix run home-manager/master -- switch --flake .#orbubu
-
-wsl:
-	nix build ".#nixosConfigurations.wsl.config.system.build.toplevel"

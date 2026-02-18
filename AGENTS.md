@@ -106,7 +106,7 @@ if pkgs.stdenv.isDarwin then ... else ...
 
 ### Naming Conventions
 
-- **Hosts:** Named by machine (`mbpromax`, `mmm1`, `nixos`, `orbubu`, `wsl`)
+- **Hosts:** Named by machine (`mbpromax`, `mmm1`, `nixos`, `orbubu`)
 - **Modules:** Named by concern (`keyboard.nix`, `dock.nix`, `power.nix`)
 - **Home modules:** Named by tool (`git.nix`, `shell.nix`, `nvim.nix`, `zen.nix`)
 - **User:** Always `patwoz`

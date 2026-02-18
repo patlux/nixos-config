@@ -7,7 +7,7 @@
 {
   programs.zsh = {
     enable = true;
-    enableCompletion = true;
+    enableCompletion = false;
     autocd = true;
     defaultKeymap = "viins";
 
@@ -38,6 +38,26 @@
     };
 
     initContent = ''
+      if [[ -f "$HOME/.orbstack/shell/init.zsh" ]]; then
+        source "$HOME/.orbstack/shell/init.zsh" 2>/dev/null || true
+      fi
+
+      _zcompdump_file="''${ZDOTDIR:-$HOME}/.zcompdump"
+      autoload -Uz compinit
+      if [[ -f "$_zcompdump_file" ]]; then
+        compinit -C
+      else
+        compinit
+      fi
+
+      if [[ -f "$_zcompdump_file" ]] && {
+        [[ ! -f "$_zcompdump_file.zwc" ]] || [[ "$_zcompdump_file" -nt "$_zcompdump_file.zwc" ]]
+      }; then
+        zcompile "$_zcompdump_file" 2>/dev/null || true
+      fi
+
+      unset _zcompdump_file
+
       # Directory stack (replaces prezto directory module)
       setopt AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_SILENT
 
@@ -199,9 +219,35 @@
       GPG_TTY="$(tty)"
       export GPG_TTY
 
-      if [ -f ~/.zshrc_secret ]; then
-        chmod 600 ~/.zshrc_secret 2>/dev/null || true
-        source ~/.zshrc_secret
+      _load_zshrc_secret() {
+        if [[ -n "$__ZSHRC_SECRET_LOADED" ]]; then
+          return
+        fi
+
+        export __ZSHRC_SECRET_LOADED=1
+
+        if [ -f ~/.zshrc_secret ]; then
+          chmod 600 ~/.zshrc_secret 2>/dev/null || true
+
+          if [ ! -f ~/.zshrc_secret.zwc ] || [ ~/.zshrc_secret -nt ~/.zshrc_secret.zwc ]; then
+            zcompile ~/.zshrc_secret 2>/dev/null || true
+            chmod 600 ~/.zshrc_secret.zwc 2>/dev/null || true
+          fi
+
+          source ~/.zshrc_secret
+        fi
+      }
+
+      if [[ $options[zle] = on ]]; then
+        _load_zshrc_secret_on_accept_line() {
+          _load_zshrc_secret
+          zle -A .accept-line accept-line
+          zle .accept-line
+        }
+
+        zle -N accept-line _load_zshrc_secret_on_accept_line
+      else
+        _load_zshrc_secret
       fi
     '';
   };

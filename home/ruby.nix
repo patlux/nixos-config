@@ -9,8 +9,8 @@
   home.file.".default-gems".source = ./files/.default-gems;
 
   programs.zsh.initContent = ''
-    if [ $(mise ls ruby | wc -l) -ge 1 ]; then
-      export PATH="$(mise exec ruby -- ruby -e 'puts Gem.user_dir')/bin:$PATH"
-    fi
+    for gem_user_bin in $HOME/.gem/ruby/*/bin(N); do
+      export PATH="$gem_user_bin:$PATH"
+    done
   '';
 }

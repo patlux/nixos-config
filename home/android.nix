@@ -5,10 +5,14 @@
     export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
     export ANDROID_HOME=$HOME/Library/Android/sdk
     # export ANDROID_AVD_HOME=/Volumes/home/VMS/Android-Emulator
-    export PATH=$ANDROID_SDK_ROOT/tools:$PATH
-    export PATH=$ANDROID_SDK_ROOT/tools/bin:$PATH
     export PATH=$ANDROID_SDK_ROOT/platform-tools:$PATH
+    export PATH=$ANDROID_SDK_ROOT/emulator:$PATH
     # \"Android SDK Command-line Tools (latest)\" needs to be installed (See SETUP_MACOS.md)
     export PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH
+
+    if [ -d "$ANDROID_SDK_ROOT/emulator/emulator" ]; then
+      echo "Warning: $ANDROID_SDK_ROOT/emulator/emulator resolves to a directory." >&2
+      echo "MiniSim expects an executable at that path." >&2
+    fi
   '';
 }

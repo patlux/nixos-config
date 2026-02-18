@@ -23,7 +23,9 @@
   programs.zsh.shellAliases.update = "sudo darwin-rebuild switch --flake ~/.config/nixos\\#mbpromax";
 
   programs.zsh.initContent = ''
-    ssh-add --apple-load-keychain 2> /dev/null
+    if [[ -n "$SSH_AUTH_SOCK" ]] && ! ssh-add -l >/dev/null 2>&1; then
+      ssh-add --apple-load-keychain >/dev/null 2>&1 || true
+    fi
   '';
 
   home.packages = with pkgs; [

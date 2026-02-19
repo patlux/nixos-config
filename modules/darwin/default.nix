@@ -26,6 +26,9 @@
   ];
 
   security.pam.services.sudo_local.touchIdAuth = true;
+  security.sudo.extraConfig = ''
+    Defaults timestamp_timeout=60
+  '';
 
   system.defaults.NSGlobalDomain = {
     "com.apple.sound.beep.feedback" = 0;

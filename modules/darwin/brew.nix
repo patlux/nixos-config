@@ -21,6 +21,8 @@
     "libyaml" # ruby-build dependency (psych extension)
     "gmp" # ruby-build dependency (bignum/openssl)
     "defaultbrowser"
+    "displayplacer"
+    "sleepwatcher"
   ];
   homebrew.casks = [
     "wezterm"

@@ -151,7 +151,7 @@ Override pre-commit with `git commit --no-verify` or add allowlist entry to `.gi
 
 1. **Declarative over imperative** — All config belongs in `.nix` files, not manual shell commands
 2. **Packages via nixpkgs** — Use nixpkgs package names, not `npm install` or `pip install`
-3. **macOS casks via homebrew.nix** — Declare in `modules/darwin/brew.nix`, not `brew install`
+3. **macOS Homebrew via homebrew.nix** — Declare casks and brews in `modules/darwin/brew.nix`; never run `brew install`/`brew uninstall` manually
 4. **Compositional** — Hosts pick which home modules to import; not all hosts get everything
 5. **Single nixpkgs pin** — All flake inputs follow the root `nixpkgs` to avoid version conflicts
 6. **Format before commit** — Always run `make fmt` before committing `.nix` changes

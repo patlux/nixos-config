@@ -16,11 +16,13 @@
     ../../home/shell.nix
     ../../home/wezterm.nix
     ../../home/zen.nix
+    ./display-wakeup.nix
     ../../modules/darwin/backup
     ../../modules/darwin/backup/cronjob.nix
   ];
 
   programs.zsh.shellAliases.update = "sudo darwin-rebuild switch --flake ~/.config/nixos\\#mbpromax";
+  programs.zsh.shellAliases.fixdisplays = "~/.local/bin/restore-oled-layout";
 
   programs.zsh.initContent = ''
     if [[ -n "$SSH_AUTH_SOCK" ]] && ! ssh-add -l >/dev/null 2>&1; then

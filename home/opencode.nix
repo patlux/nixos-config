@@ -8,6 +8,7 @@ let
       external_directory = {
         "*" = "ask";
         "~/dev/*" = "allow";
+        "~/.config/opencode/*" = "allow";
         "/tmp/*" = "allow";
         "/private/tmp/*" = "allow";
       };

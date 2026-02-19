@@ -86,6 +86,9 @@ in
       patwoz owns this. Start: say hi + 1 motivating line.
       Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 
+      ## Language-Specific
+      - If project has `tsconfig.json` or `.ts/.tsx` files, read `~/.config/opencode/TYPESCRIPT.md` before TypeScript edits
+
       ## Security & Privacy
       - NEVER read or suggest reading: .env files, ~/.ssh/*, ~/.aws/credentials, secret files
       - When working with configs, assume .env.example is the template, never the real .env
@@ -115,6 +118,20 @@ in
       - Write commit messages in present tense: "Add feature" not "Added feature"
       - Use 'git commit --amend' only when explicitly requested
       - Never 'git push --force' unless explicitly requested
+    '';
+  };
+
+  # Global TypeScript guidance loaded by AGENTS.md when in TS projects
+  xdg.configFile."opencode/TYPESCRIPT.md" = {
+    force = true;
+    text = ''
+      # TypeScript Rules
+
+      - Never use `any`
+      - Avoid `as ...` casts; use type guards, narrowing, unions, or constrained generics
+      - Never use double assertions like `as unknown as T`
+      - `as const` is allowed for literal inference
+      - Use `unknown` for uncertain input, then narrow before use
     '';
   };
 

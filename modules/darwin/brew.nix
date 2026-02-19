@@ -43,7 +43,7 @@
     "ghostty"
     "libreoffice"
     "gimp"
-    "discord"
+    "vesktop"
     "imageoptim"
     "insomnium"
     "cleanshot"

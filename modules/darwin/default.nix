@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -107,6 +112,21 @@
   networking.applicationFirewall.enable = true;
   networking.applicationFirewall.blockAllIncoming = false;
   networking.applicationFirewall.enableStealthMode = true;
+
+  launchd.user.envVariables =
+    let
+      primaryUser = config.system.primaryUser or null;
+      primaryUserHome =
+        if primaryUser == null then
+          null
+        else
+          lib.attrByPath [ "users" "users" primaryUser "home" ] "/Users/${primaryUser}" config;
+      androidSdkRoot = if primaryUserHome == null then null else "${primaryUserHome}/Library/Android/sdk";
+    in
+    lib.mkIf (androidSdkRoot != null) {
+      ANDROID_HOME = androidSdkRoot;
+      ANDROID_SDK_ROOT = androidSdkRoot;
+    };
 
   system.activationScripts.activateSettings.text = ''
     printf "disabling spotlight indexing... "

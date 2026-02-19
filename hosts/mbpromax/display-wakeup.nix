@@ -13,8 +13,7 @@
       RIGHT_OLED="s808669267"
       TARGET_RES="2560x1440"
       TARGET_HZ="240"
-      LEFT_ORIGIN="(0,0)"
-      RIGHT_ORIGIN="(2560,0)"
+      FALLBACK_HZ="120"
       LOCK_DIR="/tmp/de.patwoz.restore-oled-layout.lock"
 
       if [[ ! -x "$DISPLAYPLACER" ]]; then
@@ -53,21 +52,70 @@
         [[ "$current" == *"Serial screen id: $LEFT_OLED"* ]] && [[ "$current" == *"Serial screen id: $RIGHT_OLED"* ]]
       }
 
-      has_target_layout() {
-        local current left right
+      select_mode() {
+        local block="$1"
 
-        current="$($DISPLAYPLACER list 2>/dev/null || true)"
-        left="$(serial_block "$LEFT_OLED" "$current")"
-        right="$(serial_block "$RIGHT_OLED" "$current")"
+        if [[ "$block" == *"res:$TARGET_RES hz:$TARGET_HZ color_depth:8 scaling:on"* ]]; then
+          echo "res:$TARGET_RES hz:$TARGET_HZ color_depth:8 scaling:on"
+          return 0
+        fi
 
-        [[ -n "$left" ]] || return 1
-        [[ -n "$right" ]] || return 1
-        [[ "$left" == *"Resolution: $TARGET_RES"* ]] || return 1
-        [[ "$left" == *"Hertz: $TARGET_HZ"* ]] || return 1
-        [[ "$left" == *"Origin: $LEFT_ORIGIN"* ]] || return 1
-        [[ "$right" == *"Resolution: $TARGET_RES"* ]] || return 1
-        [[ "$right" == *"Hertz: $TARGET_HZ"* ]] || return 1
-        [[ "$right" == *"Origin: $RIGHT_ORIGIN"* ]] || return 1
+        if [[ "$block" == *"res:$TARGET_RES hz:$TARGET_HZ color_depth:8"* ]]; then
+          echo "res:$TARGET_RES hz:$TARGET_HZ color_depth:8"
+          return 0
+        fi
+
+        if [[ "$block" == *"res:$TARGET_RES hz:$FALLBACK_HZ color_depth:8 scaling:on"* ]]; then
+          echo "res:$TARGET_RES hz:$FALLBACK_HZ color_depth:8 scaling:on"
+          return 0
+        fi
+
+        if [[ "$block" == *"res:$TARGET_RES hz:$FALLBACK_HZ color_depth:8"* ]]; then
+          echo "res:$TARGET_RES hz:$FALLBACK_HZ color_depth:8"
+          return 0
+        fi
+
+        if [[ "$block" == *"res:1920x1080 hz:$TARGET_HZ color_depth:8 scaling:on"* ]]; then
+          echo "res:1920x1080 hz:$TARGET_HZ color_depth:8 scaling:on"
+          return 0
+        fi
+
+        if [[ "$block" == *"res:1920x1080 hz:$TARGET_HZ color_depth:8"* ]]; then
+          echo "res:1920x1080 hz:$TARGET_HZ color_depth:8"
+          return 0
+        fi
+
+        if [[ "$block" == *"res:1920x1080 hz:$FALLBACK_HZ color_depth:8 scaling:on"* ]]; then
+          echo "res:1920x1080 hz:$FALLBACK_HZ color_depth:8 scaling:on"
+          return 0
+        fi
+
+        if [[ "$block" == *"res:1920x1080 hz:$FALLBACK_HZ color_depth:8"* ]]; then
+          echo "res:1920x1080 hz:$FALLBACK_HZ color_depth:8"
+          return 0
+        fi
+
+        return 1
+      }
+
+      extract_origin() {
+        local block="$1"
+
+        awk '
+          /^Origin:/ {
+            print $2
+            exit
+          }
+        ' <<<"$block"
+      }
+
+      mode_is_current() {
+        local block="$1"
+        local mode="$2"
+        local current_mode
+
+        current_mode="$(awk '/<-- current mode/ { print; exit }' <<<"$block")"
+        [[ -n "$current_mode" ]] && [[ "$current_mode" == *"$mode"* ]]
       }
 
       for _ in 1 2 3 4 5 6 7 8 9 10; do
@@ -82,19 +130,29 @@
         exit 0
       fi
 
-      if has_target_layout; then
-        exit 0
-      fi
-
       for _ in 1 2 3 4 5 6; do
-        "$DISPLAYPLACER" \
-          "id:$LEFT_OLED res:$TARGET_RES hz:$TARGET_HZ color_depth:8 enabled:true scaling:on origin:$LEFT_ORIGIN degree:0" \
-          "id:$RIGHT_OLED res:$TARGET_RES hz:$TARGET_HZ color_depth:8 enabled:true scaling:on origin:$RIGHT_ORIGIN degree:0" \
-          || true
+        current="$($DISPLAYPLACER list 2>/dev/null || true)"
+        left="$(serial_block "$LEFT_OLED" "$current")"
+        right="$(serial_block "$RIGHT_OLED" "$current")"
 
-        if has_target_layout; then
+        left_mode="$(select_mode "$left" || true)"
+        right_mode="$(select_mode "$right" || true)"
+        left_origin="$(extract_origin "$left")"
+        right_origin="$(extract_origin "$right")"
+
+        if [[ -z "$left_mode" ]] || [[ -z "$right_mode" ]] || [[ -z "$left_origin" ]] || [[ -z "$right_origin" ]]; then
+          sleep 2
+          continue
+        fi
+
+        if mode_is_current "$left" "$left_mode" && mode_is_current "$right" "$right_mode"; then
           exit 0
         fi
+
+        "$DISPLAYPLACER" \
+          "id:$LEFT_OLED $left_mode enabled:true origin:$left_origin degree:0" \
+          "id:$RIGHT_OLED $right_mode enabled:true origin:$right_origin degree:0" \
+          || true
 
         sleep 2
       done

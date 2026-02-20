@@ -8,6 +8,7 @@
     ../../home/direnv.nix
     ../../home/git.nix
     ../../home/gnupg.nix
+    ../../home/ghostty.nix
     ../../home/mise.nix
     ../../home/nvim.nix
     ../../home/opencode.nix

@@ -5,6 +5,7 @@
     ../../home/core.nix
     ../../home/direnv.nix
     ../../home/git.nix
+    ../../home/ghostty.nix
     ../../home/gnupg.nix
     ../../home/mise.nix
     ../../home/packages.nix

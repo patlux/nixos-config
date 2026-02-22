@@ -129,6 +129,7 @@
     lib.mkIf (androidSdkRoot != null) {
       ANDROID_HOME = androidSdkRoot;
       ANDROID_SDK_ROOT = androidSdkRoot;
+      ANDROID_AVD_HOME = "${primaryUserHome}/.android/avd";
     };
 
   system.activationScripts.activateSettings.text = ''

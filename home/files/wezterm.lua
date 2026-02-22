@@ -4,6 +4,8 @@ local config = wezterm.config_builder()
 config.color_scheme = "Sonokai (Gogh)"
 config.font = wezterm.font("MesloLGS Nerd Font")
 config.font_size = 20.0
+config.audible_bell = "Disabled"
+config.scrollback_lines = 10000
 
 config.tab_bar_at_bottom = true
 
@@ -19,7 +21,7 @@ config.window_padding = {
 
 config.window_decorations = "RESIZE"
 
-function active_tab_idx(mux_win)
+local function active_tab_idx(mux_win)
 	for _, item in ipairs(mux_win:tabs_with_info()) do
 		-- wezterm.log_info('idx: ', idx, 'tab:', item)
 		if item.is_active then
@@ -30,7 +32,17 @@ end
 
 local act = wezterm.action
 local workspaces = {
-	{ name = "patwoz", status_bg = "#000000" },
+	{
+		name = "patwoz",
+		status_bg = "#000000",
+		tabs = {
+			{
+				cwd = "~/dev/Personal/daily-work",
+				title = "daily-work",
+				command = "nvim 2026.md",
+			},
+		},
+	},
 	{
 		name = "piparo.tech",
 		status_bg = "#1b365d",
@@ -144,6 +156,37 @@ local function set_tab_title(tab, title)
 	end
 end
 
+local function hex_to_rgb(color)
+	if type(color) ~= "string" then
+		return nil
+	end
+
+	local hex = color:gsub("#", "")
+	if #hex == 3 and hex:match("^%x%x%x$") then
+		hex = hex:gsub(".", "%1%1")
+	end
+
+	if #hex ~= 6 or not hex:match("^%x%x%x%x%x%x$") then
+		return nil
+	end
+
+	return tonumber(hex:sub(1, 2), 16), tonumber(hex:sub(3, 4), 16), tonumber(hex:sub(5, 6), 16)
+end
+
+local function status_fg_for_bg(bg_color)
+	local r, g, b = hex_to_rgb(bg_color)
+	if not r then
+		return "#f9f5d7"
+	end
+
+	local yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000
+	if yiq >= 145 then
+		return "#1b1b1b"
+	end
+
+	return "#f9f5d7"
+end
+
 local function workspace_has_windows(name)
 	for _, mux_win in ipairs(wezterm.mux.all_windows()) do
 		if mux_win:get_workspace() == name then
@@ -252,14 +295,14 @@ config.keys = {
 	{ key = ",", mods = "CTRL", action = act.ActivateTabRelative(-1) },
 	{
 		key = "h",
-		mods = "CTRL",
+		mods = "SHIFT|CTRL",
 		action = wezterm.action_callback(function(win, pane)
 			switch_workspace_relative(win, pane, -1)
 		end),
 	},
 	{
 		key = "l",
-		mods = "CTRL",
+		mods = "SHIFT|CTRL",
 		action = wezterm.action_callback(function(win, pane)
 			switch_workspace_relative(win, pane, 1)
 		end),
@@ -290,7 +333,6 @@ config.keys = {
 			end),
 		}),
 	},
-	-- { key = "l", mods = "CTRL", action = wezterm.action({ EmitEvent = "toggle-dark-mode" }) },
 	{
 		key = "t",
 		mods = "CMD",
@@ -320,28 +362,12 @@ wezterm.on("update-right-status", function(window, pane)
 	local workspace = window:active_workspace()
 	local workspace_config = workspace_lookup[workspace] or {}
 	local workspace_status_bg = workspace_config.status_bg or default_workspace_status_bg
+	local workspace_status_fg = workspace_config.status_fg or status_fg_for_bg(workspace_status_bg)
 	window:set_left_status(wezterm.format({
 		{ Background = { Color = workspace_status_bg } },
-		{ Foreground = { Color = "#f9f5d7" } },
+		{ Foreground = { Color = workspace_status_fg } },
 		{ Text = "  " .. workspace .. "  " },
 	}))
-end)
-
--- toggle light/dark scheme with CTRL+l
-wezterm.on("toggle-dark-mode", function(window, pane)
-	-- local light_scheme = "Summerfruit Light (base16)"
-	local light_scheme = "Alabaster"
-	local dark_scheme = "Sonokai (Gogh)"
-	local overrides = window:get_config_overrides() or {}
-	wezterm.log_info("Current color scheme is: ", overrides.color_scheme)
-	if overrides.color_scheme == light_scheme then
-		wezterm.log_info("Setting to Dark Scheme: ", overrides.color_scheme)
-		overrides.color_scheme = dark_scheme
-	else
-		wezterm.log_info("Setting to Light ", overrides.color_scheme)
-		overrides.color_scheme = light_scheme
-	end
-	window:set_config_overrides(overrides)
 end)
 
 return config

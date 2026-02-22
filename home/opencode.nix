@@ -9,6 +9,7 @@ let
         "*" = "ask";
         "~/dev/*" = "allow";
         "~/.config/opencode/*" = "allow";
+        "~/Library/Logs/*" = "allow";
         "/tmp/*" = "allow";
         "/private/tmp/*" = "allow";
       };
@@ -133,6 +134,34 @@ in
       - Never use double assertions like `as unknown as T`
       - `as const` is allowed for literal inference
       - Use `unknown` for uncertain input, then narrow before use
+    '';
+  };
+
+  # Global custom slash command: /init-nx
+  xdg.configFile."opencode/commands/init-nx.md" = {
+    force = true;
+    text = ''
+      ---
+      description: Initialize Nix setup (flake or .nix)
+      agent: build
+      ---
+
+      Initialize Nix project scaffolding in the current folder.
+
+      Parameter:
+      - `$1` selects layout:
+        - `flake` (default when omitted): create a root `flake.nix`
+        - `.nix`: create a `.nix/`-based layout
+
+      Requirements:
+      1. Detect the project stack from files in the current folder (`package.json`, `pyproject.toml`, `go.mod`, etc.).
+      2. Add all dependencies required to build/start the project from this folder via Nix.
+      3. Create `.envrc` configured for the generated setup.
+      4. Ensure `.gitignore` contains `.direnv`.
+      5. Keep changes minimal and avoid unrelated edits.
+      6. Report the files created/changed and any follow-up commands.
+
+      If `$1` is provided and is not `flake` or `.nix`, ask which layout to use.
     '';
   };
 

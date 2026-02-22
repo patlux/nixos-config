@@ -19,6 +19,9 @@
       mkdir = "mkdir -p -v";
       k = "kubectl";
       lg = "lazygit";
+      tn = "tmux new -As main";
+      ta = "tmux attach -t main";
+      tl = "tmux ls";
       grep = "grep --color=auto";
       ".." = "cd ..";
       "..." = "cd ../..";
@@ -40,6 +43,10 @@
     initContent = ''
       if [[ -f "$HOME/.orbstack/shell/init.zsh" ]]; then
         source "$HOME/.orbstack/shell/init.zsh" 2>/dev/null || true
+      fi
+
+      if [[ -o interactive ]] && [[ -n "$SSH_CONNECTION" ]] && [[ -z "$TMUX" ]] && command -v tmux >/dev/null 2>&1; then
+        exec tmux new-session -A -s ssh
       fi
 
       _zcompdump_file="''${ZDOTDIR:-$HOME}/.zcompdump"

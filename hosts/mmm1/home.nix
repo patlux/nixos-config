@@ -13,6 +13,7 @@
     ../../home/packages.nix
     ../../home/ruby.nix
     ../../home/shell.nix
+    ../../home/tmux.nix
     ../../home/wezterm.nix
   ];
 

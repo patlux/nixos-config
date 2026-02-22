@@ -40,7 +40,7 @@ Defined in `.github/workflows/check.yml`, runs on push to `main` and PRs:
 
 ### Verifying Changes
 
-After any `.nix` file change:
+After each meaningful `.nix` change batch:
 1. `make fmt` — Format first
 2. `make lint` — Check for common issues
 3. `make check` — Validate the flake evaluates correctly
@@ -48,6 +48,27 @@ After any `.nix` file change:
 5. `make switch` — Apply (only when explicitly requested by user)
 
 There are no unit tests. Validation is via `nix flake check` and `nix fmt --check`.
+
+## Execution Workflow
+
+Classify work before editing:
+- **Small:** Direct edit and run relevant checks
+- **Medium/Large:** Propose 2-3 implementation options with tradeoffs/risks, then implement after direction is clear
+
+### Scope and Progress
+
+- Keep edits scoped to the requested concern; avoid unrelated cleanup
+- Preserve existing module boundaries and naming unless restructuring is explicitly requested
+- If work drifts or stalls, stop and report current status, blockers, and next-step options
+
+### Verification Loop
+
+After each meaningful change batch:
+1. `make fmt`
+2. `make lint`
+3. `make check`
+4. `make preview` — when package/system impact is expected
+5. `make switch` — only when explicitly requested by user
 
 ## Code Style
 
@@ -104,6 +125,12 @@ if pkgs.stdenv.isDarwin then ... else ...
 - `.text = '' ... ''` for inline content
 - `force = true` when files may already exist from other tools
 
+### Change Scope Rules
+
+- Keep edits focused on the requested host/module/concern
+- Avoid unrelated refactors or formatting-only rewrites outside the touched scope
+- Refactor adjacent code only when necessary to support the requested change safely
+
 ### Naming Conventions
 
 - **Hosts:** Named by machine (`mbpromax`, `mmm1`, `nixos`, `orbubu`)
@@ -143,9 +170,17 @@ Override pre-commit with `git commit --no-verify` or add allowlist entry to `.gi
 ## Git Workflow
 
 - Write commit messages in **present tense imperative**: "Add feature" not "Added feature"
+- Prefer atomic commits (one concern per commit)
+- Before committing `.nix` changes, ensure `make fmt`, `make lint`, and `make check` pass
 - Use `git commit --amend` **only** when explicitly requested
 - Never `git push --force` unless explicitly requested
 - Run `make setup` after cloning to install the pre-commit hook
+
+## Documentation Sync
+
+- Update this file when repository structure, command workflow, or conventions materially change
+- Keep architecture examples (`hosts/`, `modules/`, `home/`) aligned with the current repository tree
+- If a guideline changes in practice, update it in the same PR
 
 ## Key Principles
 

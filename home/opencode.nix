@@ -70,6 +70,26 @@ let
 
         # Intentionally NOT including `models = { ... }` to keep config small.
       };
+
+      lmstudio = {
+        npm = "@ai-sdk/openai-compatible";
+        name = "LM Studio (local)";
+        options = {
+          baseURL = "http://127.0.0.1:1234/v1";
+        };
+        models = {
+          "qwen/qwen3.5-35b-a3b" = { };
+          "qwen2.5-32b-instruct" = { };
+          "text-embedding-nomic-embed-text-v1.5" = { };
+          "mistralai/devstral-small-2-2512" = { };
+          "qwen/qwen3-coder-30b" = { };
+          "google/gemma-3-12b" = { };
+          "qwen/qwen2.5-coder-32b" = { };
+          "openai/gpt-oss-20b" = { };
+          "olmocr-7b-0225-preview@bf16" = { };
+          "olmocr-7b-0225-preview@4bit" = { };
+        };
+      };
     };
   };
 in

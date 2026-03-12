@@ -1,5 +1,22 @@
 { pkgs, ... }:
 
+let
+  wtp = pkgs.buildGoModule rec {
+    pname = "wtp";
+    version = "2.9.0";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "satococoa";
+      repo = "wtp";
+      rev = "v${version}";
+      hash = "sha256-IWDuTYwwYrtvUYDxFnN+LuK4T6rd2vd5N0AYy8+YDMk=";
+    };
+
+    vendorHash = "sha256-wX6TeALJojynP4ocOR45WkayVVwvTr2LUbfAxuns9SM=";
+    subPackages = [ "cmd/wtp" ];
+    doCheck = false;
+  };
+in
 {
 
   # --- Program modules (provide the binary + config integration) ---
@@ -136,6 +153,7 @@
       gh
       glab
       jira-cli-go
+      wtp
     ])
     ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
       pkgs.libsecret

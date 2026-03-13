@@ -6,7 +6,7 @@ endif
 
 UNAME := $(shell uname)
 NIXNAME ?= mbpromax
-NIX_EXPERIMENTAL := --extra-experimental-features "nix-command flakes"
+NIX_CONFIG_EXPERIMENTAL := NIX_CONFIG='experimental-features = nix-command flakes'
 
 .PHONY: help setup fmt lint check audit update preview switch orbubu
 
@@ -30,14 +30,14 @@ setup:
 	@echo "Git hooks installed"
 
 fmt:
-	nix $(NIX_EXPERIMENTAL) fmt
+	$(NIX_CONFIG_EXPERIMENTAL) nix fmt
 
 lint:
-	nix $(NIX_EXPERIMENTAL) run nixpkgs#statix -- check .
+	$(NIX_CONFIG_EXPERIMENTAL) nix run nixpkgs#statix -- check .
 
 check:
-	nix $(NIX_EXPERIMENTAL) fmt -- --ci
-	nix $(NIX_EXPERIMENTAL) flake check --no-build
+	$(NIX_CONFIG_EXPERIMENTAL) nix fmt -- --ci
+	$(NIX_CONFIG_EXPERIMENTAL) nix flake check --no-build
 
 audit:
 	@if ! command -v gitleaks >/dev/null 2>&1; then \
@@ -47,24 +47,24 @@ audit:
 	gitleaks git --verbose
 
 update:
-	nix $(NIX_EXPERIMENTAL) flake update
+	$(NIX_CONFIG_EXPERIMENTAL) nix flake update
 
 preview:
 ifeq ($(UNAME), Darwin)
-	nix $(NIX_EXPERIMENTAL) build ".#darwinConfigurations.${NIXNAME}.system"
+	$(NIX_CONFIG_EXPERIMENTAL) nix build ".#darwinConfigurations.${NIXNAME}.system"
 	nix store diff-closures /nix/var/nix/profiles/system ./result
 else
-	nixos-rebuild $(NIX_EXPERIMENTAL) build --flake ".#${NIXNAME}"
+	sudo $(NIX_CONFIG_EXPERIMENTAL) nixos-rebuild build --flake ".#${NIXNAME}"
 	nix store diff-closures /nix/var/nix/profiles/system ./result
 endif
 
 switch:
 ifeq ($(UNAME), Darwin)
-	nix $(NIX_EXPERIMENTAL) build ".#darwinConfigurations.${NIXNAME}.system"
-	sudo ./result/sw/bin/darwin-rebuild $(NIX_EXPERIMENTAL) switch --flake "$$(pwd)#${NIXNAME}"
+	$(NIX_CONFIG_EXPERIMENTAL) nix build ".#darwinConfigurations.${NIXNAME}.system"
+	sudo $(NIX_CONFIG_EXPERIMENTAL) ./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#${NIXNAME}"
 else
-	sudo nixos-rebuild $(NIX_EXPERIMENTAL) switch --flake ".#${NIXNAME}"
+	sudo $(NIX_CONFIG_EXPERIMENTAL) nixos-rebuild switch --flake ".#${NIXNAME}"
 endif
 
 orbubu:
-	nix $(NIX_EXPERIMENTAL) run home-manager/master -- switch --flake .#orbubu
+	$(NIX_CONFIG_EXPERIMENTAL) nix run home-manager/master -- switch --flake .#orbubu

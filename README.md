@@ -6,27 +6,62 @@ My personal nixos configurations for my linux and macOS machines.
 
 ## Bootstrap a new machine
 
-1. [Install nix](https://github.com/DeterminateSystems/nix-installer?tab=readme-ov-file#determinate-nix-installer) (Make sure to read also https://github.com/nix-darwin/nix-darwin: At this time it's recommended **not** to use the `Determinate Nix`)
-2. Install [homebrew](https://brew.sh/)
-3. Run:
+### 1. Install Nix
+
+**macOS (nix-darwin compatible):**
+
+Use the official Nix installer (multi-user):
 
 ```sh
-# Wherever you want
-git clone https://github.com/patlux/nixos-config
-cd nixos-config
+curl -L https://nixos.org/nix/install | sh
+```
 
-# On macOS install brew first: https://brew.sh/
+**Linux (NixOS):**
+
+Follow the [NixOS installation guide](https://nixos.org/download.html).
+
+**Important:** The `Determinate Nix Installer` is currently **not recommended** for macOS if you plan to use `nix-darwin`. See [nix-darwin compatibility notes](https://github.com/nix-darwin/nix-darwin).
+
+After installation, restart your shell or run:
+
+```sh
+. ~/.nix-profile/etc/profile.d/nix.sh
+```
+
+Verify the installation:
+
+```sh
+nix --version
+```
+
+### 2. Install Homebrew (macOS only)
+
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+### 3. Clone and configure
+
+```sh
+
+# Clone this repository
+git clone https://github.com/patlux/nixos-config ~/.config/nixos
+cd ~/.config/nixos
 
 # Setup git hooks
 make setup
 
-# on Macbook Pro
+# Build and apply configuration
+# For macOS (default host: mbpromax)
 make switch
-# Additional steps in ./SETUP_MACOS.md
 
-# on NixOS
-NIXNAME=nixos make switch
+# For other hosts, specify NIXNAME:
+# NIXNAME=mbp14m1 make switch    # MacBook Pro M1 14"
+# NIXNAME=mmm1 make switch       # Mac Mini M1
+# NIXNAME=nixos make switch      # NixOS machine
 ```
+
+**Note for macOS:** See [SETUP_MACOS.md](./SETUP_MACOS.md) for additional macOS-specific setup steps.
 
 ## Maintenance
 

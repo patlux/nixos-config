@@ -103,7 +103,8 @@
 
       # macOS
 
-      darwinConfigurations = (mkDarwinHost "mbpromax") // (mkDarwinHost "mmm1");
+      darwinConfigurations =
+        (mkDarwinHost "mbpromax") // (mkDarwinHost "mmm1") // (mkDarwinHost "mbp14m1");
 
     };
 }

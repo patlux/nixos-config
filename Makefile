@@ -6,6 +6,7 @@ endif
 
 UNAME := $(shell uname)
 NIXNAME ?= mbpromax
+NIX_EXPERIMENTAL := --extra-experimental-features "nix-command flakes"
 
 .PHONY: help setup fmt lint check audit update preview switch orbubu
 
@@ -29,14 +30,14 @@ setup:
 	@echo "Git hooks installed"
 
 fmt:
-	nix fmt
+	nix $(NIX_EXPERIMENTAL) fmt
 
 lint:
-	nix run nixpkgs#statix -- check .
+	nix $(NIX_EXPERIMENTAL) run nixpkgs#statix -- check .
 
 check:
-	nix fmt -- --ci
-	nix flake check --no-build
+	nix $(NIX_EXPERIMENTAL) fmt -- --ci
+	nix $(NIX_EXPERIMENTAL) flake check --no-build
 
 audit:
 	@if ! command -v gitleaks >/dev/null 2>&1; then \
@@ -46,24 +47,24 @@ audit:
 	gitleaks git --verbose
 
 update:
-	nix flake update
+	nix $(NIX_EXPERIMENTAL) flake update
 
 preview:
 ifeq ($(UNAME), Darwin)
-	nix build ".#darwinConfigurations.${NIXNAME}.system"
+	nix $(NIX_EXPERIMENTAL) build ".#darwinConfigurations.${NIXNAME}.system"
 	nix store diff-closures /nix/var/nix/profiles/system ./result
 else
-	nixos-rebuild build --flake ".#${NIXNAME}"
+	nixos-rebuild $(NIX_EXPERIMENTAL) build --flake ".#${NIXNAME}"
 	nix store diff-closures /nix/var/nix/profiles/system ./result
 endif
 
 switch:
 ifeq ($(UNAME), Darwin)
-	nix build ".#darwinConfigurations.${NIXNAME}.system"
-	sudo ./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#${NIXNAME}"
+	nix $(NIX_EXPERIMENTAL) build ".#darwinConfigurations.${NIXNAME}.system"
+	sudo ./result/sw/bin/darwin-rebuild $(NIX_EXPERIMENTAL) switch --flake "$$(pwd)#${NIXNAME}"
 else
-	sudo nixos-rebuild switch --flake ".#${NIXNAME}"
+	sudo nixos-rebuild $(NIX_EXPERIMENTAL) switch --flake ".#${NIXNAME}"
 endif
 
 orbubu:
-	nix run home-manager/master -- switch --flake .#orbubu
+	nix $(NIX_EXPERIMENTAL) run home-manager/master -- switch --flake .#orbubu

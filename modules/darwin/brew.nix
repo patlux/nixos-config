@@ -15,7 +15,7 @@
     "pkg-config"
     "ios-deploy"
     "xcodegen"
-    "adblock"
+    "mattisg/mattisg/adblock"
     "bash" # dependency of adblock — listed explicitly to prevent cleanup errors
     "hurl"
     "libyaml" # ruby-build dependency (psych extension)

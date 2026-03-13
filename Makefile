@@ -1,4 +1,9 @@
 
+ifneq ("$(wildcard .env)","")
+include .env
+export
+endif
+
 UNAME := $(shell uname)
 NIXNAME ?= mbpromax
 
@@ -16,6 +21,8 @@ help:
 	@echo "  preview - Preview system changes without applying"
 	@echo "  switch  - Build and switch to new system configuration"
 	@echo "  orbubu  - Build and switch to orbubu home configuration"
+	@echo ""
+	@echo "Local overrides: set NIXNAME in .env (see .env.example)"
 
 setup:
 	git config core.hooksPath .githooks

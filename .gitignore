@@ -10,6 +10,7 @@ secrets.nix
 *.p12
 .env
 .env.*
+!.env.example
 
 # Editor/tool state
 .direnv/

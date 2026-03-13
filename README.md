@@ -51,8 +51,13 @@ cd ~/.config/nixos
 # Setup git hooks
 make setup
 
+# Optional: set the default host for this machine
+cp .env.example .env
+# Then edit .env and set NIXNAME to this machine, e.g.:
+# NIXNAME=mbp14m1
+
 # Build and apply configuration
-# For macOS (default host: mbpromax)
+# Uses NIXNAME from .env when present, otherwise defaults to mbpromax
 make switch
 
 # For other hosts, specify NIXNAME:
@@ -62,6 +67,22 @@ make switch
 ```
 
 **Note for macOS:** See [SETUP_MACOS.md](./SETUP_MACOS.md) for additional macOS-specific setup steps.
+
+### Local host selection with `.env`
+
+You can create a local `.env` file to tell `make switch` and `make preview` which host configuration to use by default:
+
+```sh
+cp .env.example .env
+```
+
+Example `.env`:
+
+```sh
+NIXNAME=mbp14m1
+```
+
+The `.env` file is gitignored, so it stays local to each machine.
 
 ## Maintenance
 

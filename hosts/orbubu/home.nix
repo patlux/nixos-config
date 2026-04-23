@@ -4,6 +4,7 @@
   nixpkgs.config.allowUnfree = true;
 
   imports = [
+    ../../home/claude.nix
     ../../home/core.nix
     ../../home/direnv.nix
     ../../home/git.nix

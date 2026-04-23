@@ -1,6 +1,7 @@
-{ ... }:
+{ config, ... }:
 
 let
+  opencodeNpmCacheDir = "${config.home.homeDirectory}/.local/share/opencode/npm-cache";
   opencodeConfig = {
     "$schema" = "https://opencode.ai/config.json";
 
@@ -8,14 +9,25 @@ let
       external_directory = {
         "*" = "ask";
         "~/dev/*" = "allow";
+        "~/.agent-browser" = "allow";
+        "~/.agent-browser/**" = "allow";
         "~/.config/opencode/*" = "allow";
+        "~/.local/share/opencode/*" = "allow";
         "~/Library/Logs/*" = "allow";
+        "/var/folders/*" = "allow";
+        "/var/folders/**" = "allow";
         "/tmp/*" = "allow";
+        "/private/var/folders/*" = "allow";
+        "/private/var/folders/**" = "allow";
         "/private/tmp/*" = "allow";
       };
 
       read = {
         "*" = "allow";
+        "/var/folders/*" = "allow";
+        "/var/folders/**" = "allow";
+        "/private/var/folders/*" = "allow";
+        "/private/var/folders/**" = "allow";
         "/private/tmp/*" = "allow";
 
         # Explicit .env policy (OpenCode also denies these by default)
@@ -58,6 +70,23 @@ let
       "opencode-openai-codex-auth"
     ];
 
+    mcp = {
+      chrome-devtools = {
+        type = "local";
+        command = [
+          "npx"
+          "-y"
+          "--registry"
+          "https://registry.npmjs.org"
+          "chrome-devtools-mcp@latest"
+          "--autoConnect"
+        ];
+        environment = {
+          npm_config_cache = "${opencodeNpmCacheDir}/chrome-devtools";
+        };
+      };
+    };
+
     provider = {
       openai = {
         options = {
@@ -94,6 +123,10 @@ let
   };
 in
 {
+  home.sessionVariables = {
+    npm_config_cache = opencodeNpmCacheDir;
+  };
+
   xdg.configFile."opencode/opencode.json" = {
     force = true;
     text = builtins.toJSON opencodeConfig;
@@ -122,6 +155,13 @@ in
       - When suggesting packages: use nixpkgs names, not just 'npm install'
       - For macOS (darwin): use homebrew.nix for casks, not 'brew install'
       - Test with 'darwin-rebuild switch' or 'nixos-rebuild switch' after changes
+
+      ## Chrome MCP
+      - When Chrome work is requested, always use the `chrome-devtools` MCP tools
+      - Always attach to an already running Chrome instance; do not start or control Chrome via AppleScript or `osascript`
+      - Prefer an already open tab that matches the expected URL
+      - Only open a new tab when no existing tab matches the expected URL
+      - Never use AppleScript or `osascript` to control Chrome when Chrome MCP is available
 
       ## CI Recovery
       - Use the project's default CI provider and workflow tooling (GitHub, GitLab, or other)

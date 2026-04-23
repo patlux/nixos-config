@@ -23,6 +23,7 @@
     "defaultbrowser"
   ];
   homebrew.casks = [
+    "visual-studio-code"
     "wezterm"
     "xcodes-app"
     "betterdisplay"

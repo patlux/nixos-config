@@ -5,6 +5,10 @@
     orientation = "right";
     show-recents = false; # do not show recent apps in dock
     mru-spaces = false; # do not automatically rearrange spaces based on most recent use.
+    showMissionControlGestureEnabled = true;
+    showAppExposeGestureEnabled = true;
+    showDesktopGestureEnabled = true;
+    showLaunchpadGestureEnabled = true;
     tilesize = 36;
     launchanim = false;
     expose-animation-duration = 0.1;

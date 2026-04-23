@@ -23,7 +23,10 @@
     ../../modules/darwin/backup/cronjob.nix
   ];
 
-  programs.zsh.shellAliases.update = "sudo darwin-rebuild switch --flake ~/.config/nixos\\#mbpromax";
+  programs.zsh.shellAliases = {
+    update = "sudo darwin-rebuild switch --flake ~/.config/nixos\\#mbpromax";
+    scrcpy = "scrcpy --render-driver=opengl";
+  };
 
   programs.zsh.initContent = ''
     if [[ -n "$SSH_AUTH_SOCK" ]] && ! ssh-add -l >/dev/null 2>&1; then

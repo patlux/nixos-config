@@ -51,15 +51,15 @@ local workspaces = {
 			{ cwd = "~/dev/piparo.tech", title = "vim", command = "nvim" },
 		},
 	},
-	{
-		name = "ibm",
-		status_bg = "#69a500",
-		tabs = {
-			{ cwd = "~/dev/ibm/kompass/kompass-frontend-2" },
-			{ cwd = "~/dev/ibm/kompass/kompass-frontend-2" },
-			{ cwd = "~/dev/ibm/kompass/kompass-frontend-2" },
-		},
-	},
+	-- {
+	-- 	name = "ibm",
+	-- 	status_bg = "#69a500",
+	-- 	tabs = {
+	-- 		{ cwd = "~/dev/ibm/kompass/kompass-frontend-2" },
+	-- 		{ cwd = "~/dev/ibm/kompass/kompass-frontend-2" },
+	-- 		{ cwd = "~/dev/ibm/kompass/kompass-frontend-2" },
+	-- 	},
+	-- },
 	{
 		name = "init",
 		status_bg = "#008a7d",
@@ -84,7 +84,11 @@ local workspaces = {
 			{ cwd = "~/dev/enerparc/frontend" },
 		},
 	},
-	{ name = "mueller", status_bg = "#b75a00" },
+	{
+		name = "mueller",
+		status_bg = "#b75a00",
+		{ cwd = "~/dev/mueller/musik-web" },
+	},
 }
 
 local workspace_names = {}

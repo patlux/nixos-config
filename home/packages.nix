@@ -16,6 +16,30 @@ let
     subPackages = [ "cmd/wtp" ];
     doCheck = false;
   };
+
+  piCodingAgent = pkgs.buildNpmPackage rec {
+    pname = "pi-coding-agent";
+    version = "0.66.1";
+
+    src = pkgs.fetchurl {
+      url = "https://registry.npmjs.org/@mariozechner/pi-coding-agent/-/pi-coding-agent-${version}.tgz";
+      hash = "sha256-NN26A3EQft5Bhyu53JmNECd1kgkNPPse6BsDnwGbzyE=";
+    };
+
+    npmDepsHash = "sha256-lDDntigbBzlzw28kRw+Gl0TJokYHZv+3RpYglH0hDLE=";
+    nodejs = pkgs.nodejs_22;
+    postPatch = ''
+      cp ${./pi-coding-agent-package-lock.json} package-lock.json
+    '';
+    dontNpmBuild = true;
+
+    meta = {
+      description = "Minimal terminal coding harness";
+      homepage = "https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent";
+      license = pkgs.lib.licenses.mit;
+      mainProgram = "pi";
+    };
+  };
 in
 {
 
@@ -153,6 +177,7 @@ in
       gh
       glab
       jira-cli-go
+      piCodingAgent
       wtp
     ])
     ++ pkgs.lib.optionals pkgs.stdenv.isLinux [

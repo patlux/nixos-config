@@ -11,6 +11,7 @@
     ../../home/gnupg.nix
     ../../home/mise.nix
     ../../home/nvim.nix
+    ../../home/pi.nix
     ../../home/packages.nix
     ../../home/ruby.nix
     ../../home/shell.nix

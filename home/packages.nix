@@ -40,6 +40,52 @@ let
       mainProgram = "pi";
     };
   };
+
+  fffMcpTarget =
+    {
+      aarch64-darwin = {
+        target = "aarch64-apple-darwin";
+        hash = "sha256-6esM7FhW14swOCyT5Uv7/mhUe7p6Wvh06XWqWcSQElI=";
+      };
+      aarch64-linux = {
+        target = "aarch64-unknown-linux-musl";
+        hash = "sha256-5ewAQGlud21LZR6I9Ckj/MGHz19TCS1syRPK3n992Gs=";
+      };
+      x86_64-linux = {
+        target = "x86_64-unknown-linux-musl";
+        hash = "sha256-tizTYiFxNvPLgWNILrLI6hBumRAm2cL5EuZBqDClbBg=";
+      };
+    }
+    .${pkgs.stdenv.hostPlatform.system}
+      or (throw "Unsupported system for fff-mcp: ${pkgs.stdenv.hostPlatform.system}");
+
+  fffMcp = pkgs.stdenvNoCC.mkDerivation rec {
+    pname = "fff-mcp";
+    version = "0.6.4";
+
+    src = pkgs.fetchurl {
+      url = "https://github.com/dmtrKovalenko/fff.nvim/releases/download/v${version}/fff-mcp-${fffMcpTarget.target}";
+      hash = fffMcpTarget.hash;
+    };
+
+    dontUnpack = true;
+
+    installPhase = ''
+      install -Dm755 "$src" "$out/bin/fff-mcp"
+    '';
+
+    meta = {
+      description = "FFF MCP server for file and grep search";
+      homepage = "https://github.com/dmtrKovalenko/fff.nvim";
+      license = pkgs.lib.licenses.mit;
+      mainProgram = "fff-mcp";
+      platforms = builtins.attrNames {
+        aarch64-darwin = null;
+        aarch64-linux = null;
+        x86_64-linux = null;
+      };
+    };
+  };
 in
 {
 
@@ -177,6 +223,7 @@ in
       gh
       glab
       jira-cli-go
+      fffMcp
       piCodingAgent
       wtp
     ])

@@ -13,6 +13,7 @@
     ../../home/mise.nix
     ../../home/nvim.nix
     ../../home/opencode.nix
+    ../../home/pi.nix
     ../../home/packages.nix
     ../../home/ruby.nix
     ../../home/shell.nix

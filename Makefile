@@ -37,7 +37,7 @@ lint:
 
 check:
 	$(NIX_CONFIG_EXPERIMENTAL) nix fmt -- --ci
-	$(NIX_CONFIG_EXPERIMENTAL) nix flake check --no-build
+	$(NIX_CONFIG_EXPERIMENTAL) nix flake check --no-build path:.
 
 audit:
 	@if ! command -v gitleaks >/dev/null 2>&1; then \
@@ -51,20 +51,20 @@ update:
 
 preview:
 ifeq ($(UNAME), Darwin)
-	$(NIX_CONFIG_EXPERIMENTAL) nix build ".#darwinConfigurations.${NIXNAME}.system"
+	$(NIX_CONFIG_EXPERIMENTAL) nix build "path:.#darwinConfigurations.${NIXNAME}.system"
 	nix store diff-closures /nix/var/nix/profiles/system ./result
 else
-	sudo $(NIX_CONFIG_EXPERIMENTAL) nixos-rebuild build --flake ".#${NIXNAME}"
+	sudo $(NIX_CONFIG_EXPERIMENTAL) nixos-rebuild build --flake "path:$$(pwd)#${NIXNAME}"
 	nix store diff-closures /nix/var/nix/profiles/system ./result
 endif
 
 switch:
 ifeq ($(UNAME), Darwin)
-	$(NIX_CONFIG_EXPERIMENTAL) nix build ".#darwinConfigurations.${NIXNAME}.system"
-	sudo $(NIX_CONFIG_EXPERIMENTAL) ./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#${NIXNAME}"
+	$(NIX_CONFIG_EXPERIMENTAL) nix build "path:.#darwinConfigurations.${NIXNAME}.system"
+	sudo $(NIX_CONFIG_EXPERIMENTAL) ./result/sw/bin/darwin-rebuild switch --flake "path:$$(pwd)#${NIXNAME}"
 else
-	sudo $(NIX_CONFIG_EXPERIMENTAL) nixos-rebuild switch --flake ".#${NIXNAME}"
+	sudo $(NIX_CONFIG_EXPERIMENTAL) nixos-rebuild switch --flake "path:$$(pwd)#${NIXNAME}"
 endif
 
 orbubu:
-	$(NIX_CONFIG_EXPERIMENTAL) nix run home-manager/master -- switch --flake .#orbubu
+	$(NIX_CONFIG_EXPERIMENTAL) nix run home-manager/master -- switch --flake "path:$$(pwd)#orbubu"

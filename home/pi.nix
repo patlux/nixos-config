@@ -5,6 +5,56 @@
 }:
 
 let
+  mcpServers = {
+    chrome-devtools = {
+      command = "${pkgs.nodejs_22}/bin/npx";
+      args = [
+        "-y"
+        "--registry"
+        "https://registry.npmjs.org"
+        "chrome-devtools-mcp@0.23.0"
+        "--autoConnect"
+      ];
+      env.npm_config_cache = "~/.local/share/pi/npm-cache/chrome-devtools";
+    };
+
+    playwright = {
+      command = "${pkgs.nodejs_22}/bin/npx";
+      args = [
+        "-y"
+        "--registry"
+        "https://registry.npmjs.org"
+        "@playwright/mcp@0.0.71"
+      ];
+      env.npm_config_cache = "~/.local/share/pi/npm-cache/playwright";
+    };
+
+    figma-mcp = {
+      command = "${pkgs.bash}/bin/bash";
+      args = [
+        "-lc"
+        ''
+          set -euo pipefail
+
+          security_bin="/usr/bin/security"
+          if [[ ! -x "$security_bin" ]]; then
+            echo "macOS security CLI not found; cannot read PIPARO_FIGMA_API_KEY from Keychain" >&2
+            exit 1
+          fi
+
+          keychain_account="''${USER:-$(id -un)}"
+          PIPARO_FIGMA_API_KEY="$("$security_bin" find-generic-password -a "$keychain_account" -s PIPARO_FIGMA_API_KEY -w)"
+          export PIPARO_FIGMA_API_KEY
+
+          FIGMA_API_KEY="$PIPARO_FIGMA_API_KEY"
+          export FIGMA_API_KEY
+
+          exec ${pkgs.nodejs_22}/bin/npx -y --registry https://registry.npmjs.org figma-mcp@0.1.4
+        ''
+      ];
+      env.npm_config_cache = "~/.local/share/pi/npm-cache/figma-mcp";
+    };
+  };
   piManagedSettings = {
     lastChangelogVersion = "0.70.6";
     defaultProvider = "openai-codex";
@@ -20,6 +70,21 @@ in
       ".pi/agent/extensions/opencode-bridge.js" = {
         force = true;
         source = ./files/pi/agent/extensions/opencode-bridge.js;
+      };
+
+      ".pi/agent/extensions/fff-mcp.js" = {
+        force = true;
+        source = ./files/pi/agent/extensions/fff-mcp.js;
+      };
+
+      ".pi/agent/extensions/mcp-bridge.js" = {
+        force = true;
+        source = ./files/pi/agent/extensions/mcp-bridge.js;
+      };
+
+      ".pi/agent/mcp.json" = {
+        force = true;
+        text = builtins.toJSON { servers = mcpServers; };
       };
     };
 

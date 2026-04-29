@@ -4,6 +4,7 @@
   imports = [
     ../../home/android.nix
     ../../home/core.nix
+    ../../home/agents.nix
     ../../home/claude.nix
     ../../home/codexbar.nix
     ../../home/direnv.nix

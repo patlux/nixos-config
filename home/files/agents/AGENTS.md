@@ -4,7 +4,7 @@ patwoz owns this. Start: say hi + 1 motivating line.
 Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 
 ## Language-Specific
-- If project has `tsconfig.json` or `.ts/.tsx` files, read `__TYPESCRIPT_PATH__` before TypeScript edits
+- If project has `tsconfig.json` or `.ts/.tsx` files, read `~/.config/agents/TYPESCRIPT.md` before TypeScript edits
 
 ## Security & Privacy
 - NEVER read or suggest reading: .env files, ~/.ssh/*, ~/.aws/credentials, secret files
@@ -28,6 +28,10 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 ## FFF MCP
 - For file search or grep in the current git-indexed directory, prefer the `fff` MCP tools over built-in search tools
 - Use the `fff` MCP tools for repeated search/refactor workflows before falling back to shell `rg` or `find`
+
+## External Services
+- GitHub: prefer `gh`; check access with `gh auth status`; never read token files directly
+- ClickUp: when tasks mention ClickUp tickets/API, read `~/.config/agents/services/clickup.md`; token lives in macOS Keychain item `PIPARO_CLICKUP_API_KEY`; never print/log it
 
 ## CI Recovery
 - Use the project's default CI provider and workflow tooling (GitHub, GitLab, or other)

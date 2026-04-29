@@ -5,7 +5,6 @@
 }:
 
 let
-  agentGuidanceTemplate = builtins.readFile ./files/agent/AGENTS.md;
   piManagedSettings = {
     defaultProvider = "openai-codex";
     defaultModel = "gpt-5.4";
@@ -15,18 +14,6 @@ in
 {
   home = {
     file = {
-      ".pi/agent/AGENTS.md" = {
-        force = true;
-        text =
-          builtins.replaceStrings [ "__TYPESCRIPT_PATH__" ] [ "~/.pi/agent/TYPESCRIPT.md" ]
-            agentGuidanceTemplate;
-      };
-
-      ".pi/agent/TYPESCRIPT.md" = {
-        force = true;
-        source = ./files/agent/TYPESCRIPT.md;
-      };
-
       ".pi/agent/extensions/opencode-bridge.js" = {
         force = true;
         source = ./files/pi/agent/extensions/opencode-bridge.js;

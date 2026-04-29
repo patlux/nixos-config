@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../home/agents.nix
     ../../home/claude.nix
     ../../home/core.nix
     ../../home/direnv.nix

@@ -3,7 +3,6 @@
 let
   opencodeNpmCacheDir = "${config.home.homeDirectory}/.local/share/opencode/npm-cache";
   fffMcpBin = "/etc/profiles/per-user/${config.home.username}/bin/fff-mcp";
-  agentGuidanceTemplate = builtins.readFile ./files/agent/AGENTS.md;
   opencodeConfig = {
     "$schema" = "https://opencode.ai/config.json";
 
@@ -137,20 +136,6 @@ in
     "opencode/opencode.json" = {
       force = true;
       text = builtins.toJSON opencodeConfig;
-    };
-
-    # Global AGENTS.md - personal coding standards across all projects
-    "opencode/AGENTS.md" = {
-      force = true;
-      text =
-        builtins.replaceStrings [ "__TYPESCRIPT_PATH__" ] [ "~/.config/opencode/TYPESCRIPT.md" ]
-          agentGuidanceTemplate;
-    };
-
-    # Global TypeScript guidance loaded by AGENTS.md when in TS projects
-    "opencode/TYPESCRIPT.md" = {
-      force = true;
-      source = ./files/agent/TYPESCRIPT.md;
     };
 
     # Global custom slash command: /init-nx

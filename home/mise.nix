@@ -6,7 +6,7 @@
   # ];
 
   programs.mise = {
-    enable = true;
+    enable = false;
 
     globalConfig.tools = {
       ruby = "3.2.2";

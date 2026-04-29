@@ -6,9 +6,12 @@
 
 let
   piManagedSettings = {
+    lastChangelogVersion = "0.70.6";
     defaultProvider = "openai-codex";
-    defaultModel = "gpt-5.4";
+    defaultModel = "gpt-5.5";
+    enabledModels = [ "openai-codex/gpt-5.5" ];
     hideThinkingBlock = true;
+    defaultThinkingLevel = "xhigh";
   };
 in
 {

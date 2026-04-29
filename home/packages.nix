@@ -19,14 +19,14 @@ let
 
   piCodingAgent = pkgs.buildNpmPackage rec {
     pname = "pi-coding-agent";
-    version = "0.66.1";
+    version = "0.70.6";
 
     src = pkgs.fetchurl {
       url = "https://registry.npmjs.org/@mariozechner/pi-coding-agent/-/pi-coding-agent-${version}.tgz";
-      hash = "sha256-NN26A3EQft5Bhyu53JmNECd1kgkNPPse6BsDnwGbzyE=";
+      hash = "sha256-6ycYjAKqPbXkyzyGL+ZaJKfZGmZEDJxNA3WuGoK43qc=";
     };
 
-    npmDepsHash = "sha256-lDDntigbBzlzw28kRw+Gl0TJokYHZv+3RpYglH0hDLE=";
+    npmDepsHash = "sha256-mEnM4xYMQDn2Xk5joOyacoLVVoKpHoBdAvLKtFcFRI4=";
     nodejs = pkgs.nodejs_22;
     postPatch = ''
       cp ${./pi-coding-agent-package-lock.json} package-lock.json

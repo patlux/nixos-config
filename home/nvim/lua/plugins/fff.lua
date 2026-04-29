@@ -21,6 +21,62 @@ local function current_word()
   return trim_query(vim.fn.expand("<cword>"))
 end
 
+local last_picker
+
+local function remember_picker(kind, path, opts)
+  last_picker = {
+    kind = kind,
+    path = path,
+    opts = vim.deepcopy(opts or {}),
+  }
+end
+
+local function active_picker_query()
+  local ok, picker = pcall(require, "fff.picker_ui")
+  if not ok or not picker.state or not picker.state.input_buf then
+    return nil
+  end
+
+  local input_buf = picker.state.input_buf
+  if not vim.api.nvim_buf_is_valid(input_buf) then
+    return nil
+  end
+
+  local line = vim.api.nvim_buf_get_lines(input_buf, 0, 1, false)[1] or ""
+  local prompt = picker.state.config and picker.state.config.prompt or ""
+  if prompt ~= "" and line:sub(1, #prompt) == prompt then
+    line = line:sub(#prompt + 1)
+  end
+
+  return trim_query(line)
+end
+
+local function track_picker_query()
+  local ok, picker = pcall(require, "fff.picker_ui")
+  if not ok or not picker.state or not picker.state.input_buf then
+    return
+  end
+
+  local input_buf = picker.state.input_buf
+  if not vim.api.nvim_buf_is_valid(input_buf) then
+    return
+  end
+
+  local group = vim.api.nvim_create_augroup("PatwozFffResume", { clear = true })
+  local function update_query()
+    if last_picker then
+      last_picker.opts.query = active_picker_query()
+    end
+  end
+
+  update_query()
+  vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI", "InsertLeave", "BufLeave" }, {
+    group = group,
+    buffer = input_buf,
+    callback = update_query,
+  })
+end
+
 local function selection_text()
   local mode = vim.fn.visualmode()
   local lines = vim.fn.getregion(vim.fn.getpos("'<"), vim.fn.getpos("'>"), { type = mode })
@@ -28,11 +84,28 @@ local function selection_text()
 end
 
 local function find_files(path, opts)
+  remember_picker("files", path, opts)
   require("fff").find_files(vim.tbl_extend("force", { cwd = path }, opts or {}))
+  track_picker_query()
 end
 
 local function live_grep(path, opts)
+  remember_picker("grep", path, opts)
   require("fff").live_grep(vim.tbl_extend("force", { cwd = path }, opts or {}))
+  track_picker_query()
+end
+
+local function resume()
+  if not last_picker then
+    vim.notify("No fff resume data available", vim.log.levels.INFO)
+    return
+  end
+
+  if last_picker.kind == "grep" then
+    live_grep(last_picker.path, last_picker.opts)
+  else
+    find_files(last_picker.path, last_picker.opts)
+  end
 end
 
 local function disabled_search_keys()
@@ -47,6 +120,7 @@ local function disabled_search_keys()
     { "<leader>fR", false },
     { "<leader>sg", false },
     { "<leader>sG", false },
+    { "<leader>sR", false },
     { "<leader>sw", false, mode = { "n", "x" } },
     { "<leader>sW", false, mode = { "n", "x" } },
   }
@@ -70,6 +144,9 @@ return {
     end,
     opts = {
       lazy_sync = true,
+      git = {
+        status_text_color = true,
+      },
     },
     keys = {
       {
@@ -144,6 +221,11 @@ return {
           live_grep(cwd(), { title = "Grep (cwd)" })
         end,
         desc = "Grep (cwd)",
+      },
+      {
+        "<leader>sR",
+        resume,
+        desc = "Resume",
       },
       {
         "<leader>sw",

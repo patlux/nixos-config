@@ -6,6 +6,7 @@ import path from "node:path";
 const configPath = path.join(os.homedir(), ".pi", "agent", "mcp.json");
 const defaultInitTimeoutMs = 120_000;
 const defaultRequestTimeoutMs = 60_000;
+const defaultStartupDelayMs = 250;
 
 function expandUserPath(value) {
   if (typeof value !== "string") {
@@ -344,7 +345,21 @@ function formatSeconds(milliseconds) {
   return `${(milliseconds / 1000).toFixed(1)}s`;
 }
 
+function getStartupDelayMs() {
+  const value = Number(process.env.PI_MCP_STARTUP_DELAY_MS);
+  if (Number.isFinite(value) && value >= 0) {
+    return value;
+  }
+
+  return defaultStartupDelayMs;
+}
+
 function formatServerStatus(state) {
+  if (state.status === "scheduled") {
+    const remaining = Math.max(0, state.startAfter - Date.now());
+    return `${state.server.name}: scheduled (starts in ${formatSeconds(remaining)})`;
+  }
+
   if (state.status === "ready") {
     return `${state.server.name}: ${state.server.tools.length} tools (ready in ${formatSeconds(state.readyAt - state.startedAt)})`;
   }
@@ -363,25 +378,18 @@ function formatServerStatus(state) {
 export default function mcpBridge(pi) {
   const serverStates = [];
   const configuredServers = readConfig();
+  const startupDelayMs = getStartupDelayMs();
   let shuttingDown = false;
+  let startTimer = undefined;
 
-  for (const [name, definition] of Object.entries(configuredServers)) {
-    if (definition?.enabled === false) {
-      continue;
+  function startServer(state) {
+    if (shuttingDown || state.status !== "scheduled") {
+      return;
     }
 
-    const server = new McpServer(name, definition);
-    const state = {
-      server,
-      status: "starting",
-      startedAt: Date.now(),
-      readyAt: undefined,
-      finishedAt: undefined,
-      error: undefined,
-      promise: undefined,
-    };
-
-    serverStates.push(state);
+    const { server } = state;
+    state.status = "starting";
+    state.startedAt = Date.now();
 
     state.promise = server
       .start()
@@ -406,9 +414,52 @@ export default function mcpBridge(pi) {
         state.finishedAt = Date.now();
         state.error = error instanceof Error ? error.message : String(error);
         server.error = state.error;
-        console.warn(`Failed to start ${name} MCP server: ${state.error}`);
+        console.warn(`Failed to start ${server.name} MCP server: ${state.error}`);
       });
   }
+
+  function startServers() {
+    if (startTimer) {
+      clearTimeout(startTimer);
+      startTimer = undefined;
+    }
+
+    for (const state of serverStates) {
+      startServer(state);
+    }
+  }
+
+  for (const [name, definition] of Object.entries(configuredServers)) {
+    if (definition?.enabled === false) {
+      continue;
+    }
+
+    const server = new McpServer(name, definition);
+    const now = Date.now();
+    const state = {
+      server,
+      status: "scheduled",
+      scheduledAt: now,
+      startAfter: now + startupDelayMs,
+      startedAt: undefined,
+      readyAt: undefined,
+      finishedAt: undefined,
+      error: undefined,
+      promise: undefined,
+    };
+
+    serverStates.push(state);
+  }
+
+  startTimer = setTimeout(startServers, startupDelayMs);
+
+  pi.registerCommand("mcp-start", {
+    description: "Start MCP bridge servers now",
+    handler: async (_args, ctx) => {
+      startServers();
+      ctx.ui.notify("MCP bridge servers are starting", "info");
+    },
+  });
 
   pi.registerCommand("mcp-status", {
     description: "Show MCP bridge server and tool status",
@@ -420,6 +471,11 @@ export default function mcpBridge(pi) {
 
   pi.on("session_shutdown", async () => {
     shuttingDown = true;
+
+    if (startTimer) {
+      clearTimeout(startTimer);
+      startTimer = undefined;
+    }
 
     for (const state of serverStates) {
       state.server.stop();

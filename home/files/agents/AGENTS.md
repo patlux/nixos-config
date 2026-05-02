@@ -45,6 +45,7 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 - When bringing in an upstream file, stage it in `/tmp` first, then cherry-pick; never overwrite tracked files directly
 
 ## Git Workflow
+- Do not commit or push automatically. Only run `git commit`, `git push`, or PR-publishing steps after an explicit user request in the current turn.
 - When branch name contains a ticket key (for example `ABCD-1234`), prefix commit messages as `ABCD-1234: <imperative summary>`
 - Derive the ticket key from the current branch name using the project's key format (usually `[A-Z]+-[0-9]+`)
 - Write commit messages in present tense: "Add feature" not "Added feature"

@@ -32,6 +32,15 @@ let
       cp ${./pi-coding-agent-package-lock.json} package-lock.json
     '';
     dontNpmBuild = true;
+    postInstall = ''
+      mv "$out/bin/pi" "$out/bin/pi-node"
+
+      cat > "$out/bin/pi" <<EOF
+      #!${pkgs.runtimeShell}
+      exec ${pkgs.bun}/bin/bun "$out/lib/node_modules/@mariozechner/pi-coding-agent/dist/cli.js" "\$@"
+      EOF
+      chmod +x "$out/bin/pi"
+    '';
 
     meta = {
       description = "Minimal terminal coding harness";

@@ -58,15 +58,26 @@ let
   piManagedSettings = {
     lastChangelogVersion = "0.72.0";
     defaultProvider = "openai-codex";
-    defaultModel = "gpt-5.5";
-    enabledModels = [ "openai-codex/gpt-5.5" ];
+    defaultModel = "gpt-5.3-codex";
+    enabledModels = [
+      "openai-codex/gpt-5.3-codex"
+      "openai-codex/gpt-5.5"
+      "deepseek/deepseek-v4-flash"
+      "deepseek/deepseek-v4-pro"
+    ];
     hideThinkingBlock = true;
     defaultThinkingLevel = "xhigh";
     transport = "websocket-cached";
+    quietStartup = false;
   };
 in
 {
   home = {
+    sessionVariables = {
+      PI_OFFLINE = "1";
+      PI_SKIP_VERSION_CHECK = "1";
+    };
+
     file = {
       ".pi/agent/extensions/opencode-bridge.js" = {
         force = true;

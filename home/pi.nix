@@ -56,12 +56,13 @@ let
     };
   };
   piManagedSettings = {
-    lastChangelogVersion = "0.70.6";
+    lastChangelogVersion = "0.72.0";
     defaultProvider = "openai-codex";
     defaultModel = "gpt-5.5";
     enabledModels = [ "openai-codex/gpt-5.5" ];
     hideThinkingBlock = true;
     defaultThinkingLevel = "xhigh";
+    transport = "websocket-cached";
   };
 in
 {

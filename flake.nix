@@ -18,6 +18,7 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       nix-darwin,
       home-manager,
@@ -105,6 +106,19 @@
 
       darwinConfigurations =
         (mkDarwinHost "mbpromax") // (mkDarwinHost "mmm1") // (mkDarwinHost "mbp14m1");
+
+      # Checks — validate all configurations evaluate (self-referencing avoids double eval)
+
+      checks.aarch64-darwin = {
+        mbpromax = self.darwinConfigurations.mbpromax.system;
+        mmm1 = self.darwinConfigurations.mmm1.system;
+        mbp14m1 = self.darwinConfigurations.mbp14m1.system;
+      };
+
+      checks.aarch64-linux = {
+        nixos = self.nixosConfigurations.nixos.config.system.build.toplevel;
+        orbubu = self.homeConfigurations.orbubu.activationPackage;
+      };
 
     };
 }

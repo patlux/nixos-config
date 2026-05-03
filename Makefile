@@ -67,4 +67,4 @@ else
 endif
 
 orbubu:
-	$(NIX_CONFIG_EXPERIMENTAL) nix run home-manager/master -- switch --flake "path:$$(pwd)#orbubu"
+	$(NIX_CONFIG_EXPERIMENTAL) home-manager switch --flake "path:$$(pwd)#orbubu"

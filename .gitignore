@@ -15,6 +15,7 @@ secrets.nix
 # Editor/tool state
 .direnv/
 .opencode/
+.playwright-mcp/
 
 # macOS
 .DS_Store

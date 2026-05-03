@@ -116,6 +116,9 @@
   networking.applicationFirewall.blockAllIncoming = false;
   networking.applicationFirewall.enableStealthMode = true;
 
+  # Android env vars for GUI applications (Android Studio, emulator, etc.).
+  # The same variables are also exported in home/android.nix shell init for
+  # command-line PATH resolution.
   launchd.user.envVariables =
     let
       primaryUser = config.system.primaryUser or null;

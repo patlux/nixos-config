@@ -31,12 +31,7 @@
   '';
 
   home.packages = with pkgs; [
-    pixman
-    cairo
-    pango
     dive
-    scrcpy
-    apktool
   ];
 
   home.file.".local/bin/tailscale" = {

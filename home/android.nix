@@ -1,6 +1,23 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 {
+  # scrcpy dependencies (rendering libraries)
+  home.packages = pkgs.lib.optionals pkgs.stdenv.isDarwin (
+    with pkgs;
+    [
+      pixman
+      cairo
+      pango
+      scrcpy
+      apktool
+    ]
+  );
+
+  programs.zsh.shellAliases.scrcpy = pkgs.lib.mkIf pkgs.stdenv.isDarwin "scrcpy --render-driver=opengl";
+
+  # Shell init: ANDROID_SDK_ROOT, ANDROID_HOME, ANDROID_AVD_HOME are needed here
+  # for shell PATH resolution. GUI apps (Android Studio, emulator) get these
+  # same variables via launchd.user.envVariables in modules/darwin/default.nix.
   programs.zsh.initContent = ''
     export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
     export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -81,6 +98,7 @@
     '';
   };
 
+  # MiniSim expects a specific androidHome path; point it at our shim directory.
   home.activation.minisimAndroidHome = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     /usr/bin/defaults write com.oskarkwasniewski.MiniSim androidHome -string "$HOME/.local/share/minisim-android-home"
   '';

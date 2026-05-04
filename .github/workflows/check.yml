@@ -27,6 +27,10 @@ jobs:
           nix eval .#darwinConfigurations.mmm1.system --json > /dev/null
           echo "::endgroup::"
 
+          echo "::group::Evaluate darwinConfigurations.mbp14m1"
+          nix eval .#darwinConfigurations.mbp14m1.system --json > /dev/null
+          echo "::endgroup::"
+
           echo "::group::Evaluate nixosConfigurations.nixos"
           nix eval .#nixosConfigurations.nixos.config.system.build.toplevel --json > /dev/null
           echo "::endgroup::"

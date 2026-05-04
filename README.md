@@ -56,6 +56,12 @@ cp .env.example .env
 # Then edit .env and set NIXNAME to this machine, e.g.:
 # NIXNAME=mbp14m1
 
+# Validate the configuration before applying
+make check
+
+# Preview changes before applying
+make preview
+
 # Build and apply configuration
 # Uses NIXNAME from .env when present, otherwise defaults to mbpromax
 make switch

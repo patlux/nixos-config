@@ -12,11 +12,6 @@
       source = ./files/agents/TYPESCRIPT.md;
     };
 
-    "agents/services/clickup.md" = {
-      force = true;
-      source = ./files/agents/services/clickup.md;
-    };
-
     "opencode/AGENTS.md" = {
       force = true;
       source = ./files/agents/AGENTS.md;

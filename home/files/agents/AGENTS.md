@@ -31,7 +31,8 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 
 ## External Services
 - GitHub: prefer `gh`; check access with `gh auth status`; never read token files directly
-- ClickUp: when tasks mention ClickUp tickets/API, read `~/.config/agents/services/clickup.md`; token lives in macOS Keychain item `PIPARO_CLICKUP_API_KEY`; never print/log it
+- ClickUp: when tasks mention ClickUp tickets/API, read `~/dev/agents/docs/clickup.md`; token lives in macOS Keychain item `PIPARO_CLICKUP_API_KEY`; never print/log it
+- Screenshots/recordings: if asked to view them without a location, check `~/Desktop` first; that’s where CleanShot.app saves captures
 
 ## CI Recovery
 - Use the project's default CI provider and workflow tooling (GitHub, GitLab, or other)

@@ -374,4 +374,30 @@ wezterm.on("update-right-status", function(window, pane)
 	}))
 end)
 
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+	-- Find workspace name for this tab
+	local ws_name = ""
+	for _, mux_win in ipairs(wezterm.mux.all_windows()) do
+		local found = false
+		for _, t in ipairs(mux_win:tabs_with_info()) do
+			if t.tab and t.tab:tab_id() == tab:tab_id() then
+				found = true
+				break
+			end
+		end
+		if found then
+			ws_name = mux_win:get_workspace()
+			break
+		end
+	end
+
+	local title = tab.active_pane and tab.active_pane.title or "zsh"
+
+	-- Prepend workspace name so Timing.app can auto-assign terminal time
+	if ws_name ~= "" then
+		return ws_name .. ": " .. title
+	end
+	return title
+end)
+
 return config

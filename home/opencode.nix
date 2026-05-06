@@ -166,6 +166,44 @@ in
       '';
     };
 
+    # Global custom slash command: /update-pr-main
+    "opencode/commands/update-pr-main.md" = {
+      force = true;
+      text = ''
+        ---
+        description: Merge latest main into all your open PRs
+        agent: build
+        ---
+
+        Update all open GitHub PRs owned by you by merging the latest main into each branch.
+
+        ## Steps
+
+        1. **Fetch latest main** from origin.
+        2. **List your open PRs** using `gh pr list --state open --author "@me" --json number,headRefName,title --limit 50`.
+           - If none found, report and stop.
+        3. **For each PR branch** (in any order):
+           a. Check if the branch exists locally or in a git worktree (check `git worktree list`).
+              - If it's in a worktree, work in that worktree directory.
+              - If it doesn't exist locally, try `git fetch origin <branch>` then `git checkout <branch>`.
+           b. Merge `origin/main` into it: `git merge origin/main --no-edit`.
+              - If merge fails (conflict), run `git merge --abort`, mark it as conflict, and continue.
+           c. Push: `git push origin <branch>`.
+              - If push fails (non-fast-forward), try `git pull --rebase origin <branch>` then push again.
+
+        4. **Report results** with a clear table showing which PRs succeeded, which had conflicts, and which had push failures.
+
+        5. **Go back** to the original branch you were on before starting.
+
+        ## Important
+
+        - Handle worktrees gracefully — use `git worktree list` to find them.
+        - Do NOT create PRs or do anything beyond merging.
+        - Do NOT push anything unless the merge succeeded.
+        - If a step fails, skip that PR and move to the next — don't abort the whole process.
+      '';
+    };
+
     # Global skill: Karpathy-inspired coding behavior guidelines
     "opencode/skills/karpathy-guidelines/SKILL.md" = {
       force = true;

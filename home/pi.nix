@@ -61,9 +61,13 @@ let
     defaultModel = "gpt-5.3-codex";
     enabledModels = [
       "openai-codex/gpt-5.3-codex"
+      "openai-codex/gpt-5.4-mini"
       "openai-codex/gpt-5.5"
-      "deepseek/deepseek-v4-flash"
-      "deepseek/deepseek-v4-pro"
+      "commandcode/deepseek/deepseek-v4-pro"
+      "commandcode/deepseek/deepseek-v4-flash"
+    ];
+    extensions = [
+      "/Users/patwoz/dev/Personal/pi/pi-commandcode-provider/index.ts"
     ];
     hideThinkingBlock = true;
     defaultThinkingLevel = "xhigh";

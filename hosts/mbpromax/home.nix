@@ -17,6 +17,7 @@
     ../../home/pi.nix
     ../../home/packages.nix
     ../../home/ruby.nix
+    ../../home/searxng.nix
     ../../home/shell.nix
     ../../home/tmux.nix
     ../../home/wezterm.nix

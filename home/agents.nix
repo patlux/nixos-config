@@ -25,7 +25,7 @@
         text = ''
           # Claude Code Global Adapter
 
-          Read and follow the agent-neutral guidance in `~/.config/agents/AGENTS.md`.
+          Read and follow the agent-neutral guidance in `/Users/patwoz/.config/agents/AGENTS.md`.
         '';
       };
 
@@ -34,7 +34,7 @@
         text = ''
           # Pi Coding Agent Adapter
 
-          Read and follow the agent-neutral guidance in `~/.config/agents/AGENTS.md`.
+          Read and follow the agent-neutral guidance in `/Users/patwoz/.config/agents/AGENTS.md`.
         '';
       };
     };

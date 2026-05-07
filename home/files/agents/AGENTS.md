@@ -4,16 +4,16 @@ patwoz owns this. Start: say hi + 1 motivating line.
 Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 
 ## Language-Specific
-- If project has `tsconfig.json` or `.ts/.tsx` files, read `~/.config/agents/TYPESCRIPT.md` before TypeScript edits
+- If project has `tsconfig.json` or `.ts/.tsx` files, read `/Users/patwoz/.config/agents/TYPESCRIPT.md` before TypeScript edits
 
 ## Security & Privacy
-- NEVER read or suggest reading: .env files, ~/.ssh/*, ~/.aws/credentials, secret files
+- NEVER read or suggest reading: .env files, `/Users/patwoz/.ssh/*`, `/Users/patwoz/.aws/credentials`, secret files
 - When working with configs, assume .env.example is the template, never the real .env
 - Don't commit secrets - if you see API keys in code, warn immediately
 
 ## Nix/NixOS Specific
 - Prefer declarative configuration in .nix files over imperative changes
-- When machine setup needs to change, update it declaratively in ~/.config/nixos instead of one-off manual commands
+- When machine setup needs to change, update it declaratively in `/Users/patwoz/.config/nixos` instead of one-off manual commands
 - When suggesting packages: use nixpkgs names, not just 'npm install'
 - For macOS (darwin): use homebrew.nix for casks, not 'brew install'
 - Test with 'darwin-rebuild switch' or 'nixos-rebuild switch' after changes
@@ -31,8 +31,8 @@ Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 
 ## External Services
 - GitHub: prefer `gh`; check access with `gh auth status`; never read token files directly
-- ClickUp: when tasks mention ClickUp tickets/API, read `~/dev/agents/docs/clickup.md`; token lives in macOS Keychain item `PIPARO_CLICKUP_API_KEY`; never print/log it
-- Screenshots/recordings: if asked to view them without a location, check `~/Desktop` first; that’s where CleanShot.app saves captures
+- ClickUp: when tasks mention ClickUp tickets/API, read `/Users/patwoz/dev/agents/docs/clickup.md`; token lives in macOS Keychain item `PIPARO_CLICKUP_API_KEY`; never print/log it
+- Screenshots/recordings: if asked to view them without a location, check `/Users/patwoz/Desktop` first; that’s where CleanShot.app saves captures
 
 ## CI Recovery
 - Use the project's default CI provider and workflow tooling (GitHub, GitLab, or other)
